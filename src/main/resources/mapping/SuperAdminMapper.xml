@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lib.management.mapper.SuperAdminMapper">
+  <resultMap id="BaseResultMap" type="com.lib.management.model.SuperAdmin">
+    <id column="super_admin_id" jdbcType="INTEGER" property="superAdminId" />
+    <result column="super_admin_name" jdbcType="VARCHAR" property="superAdminName" />
+    <result column="super_admin_password" jdbcType="VARCHAR" property="superAdminPassword" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    super_admin_id, super_admin_name, super_admin_password
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from super_admin
+    where super_admin_id = #{superAdminId,jdbcType=INTEGER}
+  </select>
+
+  <!--该xml配置为示例配置-->
+  <select id="selectByAdminName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select * from super_admin where super_admin_name = #{adminName,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from super_admin
+    where super_admin_id = #{superAdminId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lib.management.model.SuperAdmin">
+    insert into super_admin (super_admin_id, super_admin_name, super_admin_password
+      )
+    values (#{superAdminId,jdbcType=INTEGER}, #{superAdminName,jdbcType=VARCHAR}, #{superAdminPassword,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lib.management.model.SuperAdmin">
+    insert into super_admin
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="superAdminId != null">
+        super_admin_id,
+      </if>
+      <if test="superAdminName != null">
+        super_admin_name,
+      </if>
+      <if test="superAdminPassword != null">
+        super_admin_password,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="superAdminId != null">
+        #{superAdminId,jdbcType=INTEGER},
+      </if>
+      <if test="superAdminName != null">
+        #{superAdminName,jdbcType=VARCHAR},
+      </if>
+      <if test="superAdminPassword != null">
+        #{superAdminPassword,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lib.management.model.SuperAdmin">
+    update super_admin
+    <set>
+      <if test="superAdminName != null">
+        super_admin_name = #{superAdminName,jdbcType=VARCHAR},
+      </if>
+      <if test="superAdminPassword != null">
+        super_admin_password = #{superAdminPassword,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where super_admin_id = #{superAdminId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lib.management.model.SuperAdmin">
+    update super_admin
+    set super_admin_name = #{superAdminName,jdbcType=VARCHAR},
+      super_admin_password = #{superAdminPassword,jdbcType=VARCHAR}
+    where super_admin_id = #{superAdminId,jdbcType=INTEGER}
+  </update>
+</mapper>
