@@ -1,6 +1,8 @@
 package com.lib.management.model;
 
-public class SuperAdmin {
+import java.io.Serializable;
+
+public class SuperAdmin implements Serializable {
     private Integer superAdminId;
 
     private String superAdminName;

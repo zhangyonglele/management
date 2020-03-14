@@ -1,4 +1,4 @@
-package com.lib.management.service.serviceImp;
+package com.lib.management.service.serviceImpl;
 
 import com.lib.management.mapper.SuperAdminMapper;
 import com.lib.management.model.SuperAdmin;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 @Service
-public class SuperAdminServiceImp implements SuperAdminService {
+public class SuperAdminServiceImpl implements SuperAdminService {
     @Resource
     private SuperAdminMapper superAdminMapper;
 

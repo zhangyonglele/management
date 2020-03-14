@@ -11,6 +11,8 @@ public interface BookManagerMapper {
 
     BookManager selectByPrimaryKey(Integer bookManagerId);
 
+    BookManager selectByManagerName(String bookManagerName);
+
     int updateByPrimaryKeySelective(BookManager record);
 
     int updateByPrimaryKey(BookManager record);

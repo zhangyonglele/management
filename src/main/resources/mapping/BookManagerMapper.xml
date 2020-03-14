@@ -19,6 +19,14 @@
     from book_manager
     where book_manager_id = #{bookManagerId,jdbcType=INTEGER}
   </select>
+
+  <select id="selectByManagerName" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List"/>
+    from book_manager
+    where book_manager_name = #{bookManagerName,jdbcType=VARCHAR}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from book_manager
     where book_manager_id = #{bookManagerId,jdbcType=INTEGER}

@@ -61,3 +61,7 @@ spring:
       # Writing to Redis need key prefix
       use-key-prefix: true
 
+  session:
+    store-type: redis
+    timeout: 30M
+
