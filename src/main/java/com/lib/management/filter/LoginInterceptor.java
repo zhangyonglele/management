@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.lang.reflect.Method;
 
+/**
+ * 配置拦截器，拦截非登录权限越界
+ */
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
     @Override
@@ -20,14 +23,18 @@ public class LoginInterceptor implements HandlerInterceptor {
             HandlerMethod handlerMethod = (HandlerMethod)handler;
             Method method = handlerMethod.getMethod();
             LoginRequire loginRequire = method.getAnnotation(LoginRequire.class);
+            //如果方法注解不存在，尝试查找类注解
             if(loginRequire == null){
                 loginRequire = method.getDeclaringClass().getAnnotation(LoginRequire.class);
             }
+            //如果有访问权限限制
             if(loginRequire != null && !loginRequire.value().equals("")){
                 HttpSession session = request.getSession();
+                //尝试获取session中的授权信息
                 if(session.getAttribute("auth") != null && session.getAttribute("auth").toString().equals(loginRequire.value())){
                     return true;
                 }else{
+                    //如果权限越界，则拒绝请求
                     response.setContentType("application/json;charset=UTF-8");
                     response.getWriter().write("{\"errCode\":-1,\"msg\":\"auth refuse\"}");
                     return false;
