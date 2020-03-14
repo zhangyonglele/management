@@ -14,12 +14,15 @@ public class BookManagerController {
     @Resource
     private BookManagerService bookManagerService;
 
-//    @GetMapping()
-//    public UniversalResponseBody login(String userName, String password, HttpSession session){
-//        BookManager bookManager = bookManagerService.getBookManagerInfoByName(userName);
-//        if(!userName.equals("")){
-//            //session.
-//        }
-//    }
+    @GetMapping("/librarian/login")
+    public UniversalResponseBody login(String userName, String password, HttpSession session){
+        BookManager bookManager = bookManagerService.getBookManagerInfoByName(userName);
+        if(!userName.equals("") && bookManager.getBookManagerPassword().equals(password)){
+            session.setAttribute("auth","librarian");
+            return new UniversalResponseBody(0,"success");
+        }else{
+            return new UniversalResponseBody(-1,"auth refuse");
+        }
+    }
 
 }
