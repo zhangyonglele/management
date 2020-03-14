@@ -3,7 +3,7 @@
 <mapper namespace="com.lib.management.mapper.BookInfoMapper" >
   <resultMap id="BaseResultMap" type="com.lib.management.model.BookInfo" >
     <id column="book_info_id" property="bookInfoId" jdbcType="INTEGER" />
-    <result column="book_type" property="bookType" jdbcType="VARCHAR" />
+    <result column="book_type" property="bookType" jdbcType="INTEGER" />
     <result column="book_type_code" property="bookTypeCode" jdbcType="INTEGER" />
     <result column="book_name" property="bookName" jdbcType="VARCHAR" />
     <result column="book_price" property="bookPrice" jdbcType="VARCHAR" />
@@ -32,7 +32,7 @@
       book_name, book_price, book_author, 
       book_publisher, create_by, book_copy_number, 
       book_status)
-    values (#{bookInfoId,jdbcType=INTEGER}, #{bookType,jdbcType=VARCHAR}, #{bookTypeCode,jdbcType=INTEGER}, 
+    values (#{bookInfoId,jdbcType=INTEGER}, #{bookType,jdbcType=INTEGER}, #{bookTypeCode,jdbcType=INTEGER},
       #{bookName,jdbcType=VARCHAR}, #{bookPrice,jdbcType=VARCHAR}, #{bookAuthor,jdbcType=VARCHAR}, 
       #{bookPublisher,jdbcType=VARCHAR}, #{createBy,jdbcType=INTEGER}, #{bookCopyNumber,jdbcType=INTEGER}, 
       #{bookStatus,jdbcType=INTEGER})
@@ -108,7 +108,7 @@
     update book_info
     <set >
       <if test="bookType != null" >
-        book_type = #{bookType,jdbcType=VARCHAR},
+        book_type = #{bookType,jdbcType=INTEGER},
       </if>
       <if test="bookTypeCode != null" >
         book_type_code = #{bookTypeCode,jdbcType=INTEGER},
@@ -139,7 +139,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.lib.management.model.BookInfo" >
     update book_info
-    set book_type = #{bookType,jdbcType=VARCHAR},
+    set book_type = #{bookType,jdbcType=INTEGER},
       book_type_code = #{bookTypeCode,jdbcType=INTEGER},
       book_name = #{bookName,jdbcType=VARCHAR},
       book_price = #{bookPrice,jdbcType=VARCHAR},

@@ -1,8 +1,9 @@
 package com.lib.management.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class BookManager {
+public class BookManager implements Serializable {
     private Integer bookManagerId;
 
     private String bookManagerName;

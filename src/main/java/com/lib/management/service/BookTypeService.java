@@ -11,5 +11,7 @@ public interface BookTypeService {
 
     List<BookType> getAllType();
 
-    boolean incrBookTypeCode(int bookTypeId);
+    boolean updateBookTypeByTypeId(BookType bookType);
+
+    int incrBookTypeCode(int bookTypeId);
 }

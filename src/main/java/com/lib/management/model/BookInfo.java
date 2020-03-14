@@ -3,7 +3,7 @@ package com.lib.management.model;
 public class BookInfo {
     private Integer bookInfoId;
 
-    private String bookType;
+    private Integer bookType;
 
     private Integer bookTypeCode;
 
@@ -29,12 +29,12 @@ public class BookInfo {
         this.bookInfoId = bookInfoId;
     }
 
-    public String getBookType() {
+    public Integer getBookType() {
         return bookType;
     }
 
-    public void setBookType(String bookType) {
-        this.bookType = bookType == null ? null : bookType.trim();
+    public void setBookType(Integer bookType) {
+        this.bookType = bookType;
     }
 
     public Integer getBookTypeCode() {

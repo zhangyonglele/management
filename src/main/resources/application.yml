@@ -64,4 +64,7 @@ spring:
   session:
     store-type: redis
     timeout: 30M
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
 

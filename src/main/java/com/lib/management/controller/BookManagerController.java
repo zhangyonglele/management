@@ -19,6 +19,7 @@ public class BookManagerController {
         BookManager bookManager = bookManagerService.getBookManagerInfoByName(userName);
         if(!userName.equals("") && bookManager.getBookManagerPassword().equals(password)){
             session.setAttribute("auth","librarian");
+            session.setAttribute("userInfo",bookManager);
             return new UniversalResponseBody(0,"success");
         }else{
             return new UniversalResponseBody(-1,"auth refuse");

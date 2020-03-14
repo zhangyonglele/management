@@ -2,6 +2,8 @@ package com.lib.management.mapper;
 
 import com.lib.management.model.BookType;
 
+import java.util.List;
+
 public interface BookTypeMapper {
     int deleteByPrimaryKey(Integer bookTypeId);
 
@@ -10,6 +12,8 @@ public interface BookTypeMapper {
     int insertSelective(BookType record);
 
     BookType selectByPrimaryKey(Integer bookTypeId);
+
+    List<BookType> selectAllType();
 
     int updateByPrimaryKeySelective(BookType record);
 

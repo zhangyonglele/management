@@ -21,6 +21,7 @@ public class SuperAdminController {
         SuperAdmin superAdmin = superAdminService.searchAccountByAdminName(name);
 
         if(superAdmin != null){
+            //添加角色参数
             session.setAttribute("auth","superAdmin");
             return new UniversalResponseBody<>(0,"success",superAdmin);
         }else{
@@ -29,7 +30,7 @@ public class SuperAdminController {
     }
 
     @GetMapping("/admin/getinfo")
-    @LoginRequire("superAdmin")
+    @LoginRequire("superAdmin")//在本注解的参数中放入对应需要角色的参数
     public UniversalResponseBody getInfo(HttpSession session){
         return new UniversalResponseBody<>(0,"success",(SuperAdmin)session.getAttribute("test"));
     }
