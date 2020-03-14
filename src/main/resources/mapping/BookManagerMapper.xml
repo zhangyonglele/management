@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lib.management.mapper.BookManagerMapper" >
+  <resultMap id="BaseResultMap" type="com.lib.management.model.BookManager" >
+    <id column="book_manager_id" property="bookManagerId" jdbcType="INTEGER" />
+    <result column="book_manager_name" property="bookManagerName" jdbcType="VARCHAR" />
+    <result column="book_manager_password" property="bookManagerPassword" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="active_status" property="activeStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    book_manager_id, book_manager_name, book_manager_password, create_by, create_time, 
+    active_status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from book_manager
+    where book_manager_id = #{bookManagerId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from book_manager
+    where book_manager_id = #{bookManagerId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lib.management.model.BookManager" >
+    insert into book_manager (book_manager_id, book_manager_name, book_manager_password, 
+      create_by, create_time, active_status
+      )
+    values (#{bookManagerId,jdbcType=INTEGER}, #{bookManagerName,jdbcType=VARCHAR}, #{bookManagerPassword,jdbcType=VARCHAR}, 
+      #{createBy,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{activeStatus,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lib.management.model.BookManager" >
+    insert into book_manager
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bookManagerId != null" >
+        book_manager_id,
+      </if>
+      <if test="bookManagerName != null" >
+        book_manager_name,
+      </if>
+      <if test="bookManagerPassword != null" >
+        book_manager_password,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="activeStatus != null" >
+        active_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bookManagerId != null" >
+        #{bookManagerId,jdbcType=INTEGER},
+      </if>
+      <if test="bookManagerName != null" >
+        #{bookManagerName,jdbcType=VARCHAR},
+      </if>
+      <if test="bookManagerPassword != null" >
+        #{bookManagerPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activeStatus != null" >
+        #{activeStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lib.management.model.BookManager" >
+    update book_manager
+    <set >
+      <if test="bookManagerName != null" >
+        book_manager_name = #{bookManagerName,jdbcType=VARCHAR},
+      </if>
+      <if test="bookManagerPassword != null" >
+        book_manager_password = #{bookManagerPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activeStatus != null" >
+        active_status = #{activeStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where book_manager_id = #{bookManagerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lib.management.model.BookManager" >
+    update book_manager
+    set book_manager_name = #{bookManagerName,jdbcType=VARCHAR},
+      book_manager_password = #{bookManagerPassword,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      active_status = #{activeStatus,jdbcType=INTEGER}
+    where book_manager_id = #{bookManagerId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lib.management.mapper.BookBorrowLogMapper" >
+  <resultMap id="BaseResultMap" type="com.lib.management.model.BookBorrowLog" >
+    <id column="log_id" property="logId" jdbcType="INTEGER" />
+    <result column="book_id" property="bookId" jdbcType="INTEGER" />
+    <result column="book_borrow_by" property="bookBorrowBy" jdbcType="INTEGER" />
+    <result column="book_borrow_time" property="bookBorrowTime" jdbcType="TIMESTAMP" />
+    <result column="book_return_time" property="bookReturnTime" jdbcType="TIMESTAMP" />
+    <result column="book_borrow_status" property="bookBorrowStatus" jdbcType="INTEGER" />
+    <result column="permit_money_status" property="permitMoneyStatus" jdbcType="INTEGER" />
+    <result column="permit_money_number" property="permitMoneyNumber" jdbcType="DECIMAL" />
+    <result column="fine_status" property="fineStatus" jdbcType="INTEGER" />
+    <result column="fine_number" property="fineNumber" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    log_id, book_id, book_borrow_by, book_borrow_time, book_return_time, book_borrow_status, 
+    permit_money_status, permit_money_number, fine_status, fine_number
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from book_borrow_log
+    where log_id = #{logId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from book_borrow_log
+    where log_id = #{logId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lib.management.model.BookBorrowLog" >
+    insert into book_borrow_log (log_id, book_id, book_borrow_by, 
+      book_borrow_time, book_return_time, book_borrow_status, 
+      permit_money_status, permit_money_number, fine_status, 
+      fine_number)
+    values (#{logId,jdbcType=INTEGER}, #{bookId,jdbcType=INTEGER}, #{bookBorrowBy,jdbcType=INTEGER}, 
+      #{bookBorrowTime,jdbcType=TIMESTAMP}, #{bookReturnTime,jdbcType=TIMESTAMP}, #{bookBorrowStatus,jdbcType=INTEGER}, 
+      #{permitMoneyStatus,jdbcType=INTEGER}, #{permitMoneyNumber,jdbcType=DECIMAL}, #{fineStatus,jdbcType=INTEGER}, 
+      #{fineNumber,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lib.management.model.BookBorrowLog" >
+    insert into book_borrow_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        log_id,
+      </if>
+      <if test="bookId != null" >
+        book_id,
+      </if>
+      <if test="bookBorrowBy != null" >
+        book_borrow_by,
+      </if>
+      <if test="bookBorrowTime != null" >
+        book_borrow_time,
+      </if>
+      <if test="bookReturnTime != null" >
+        book_return_time,
+      </if>
+      <if test="bookBorrowStatus != null" >
+        book_borrow_status,
+      </if>
+      <if test="permitMoneyStatus != null" >
+        permit_money_status,
+      </if>
+      <if test="permitMoneyNumber != null" >
+        permit_money_number,
+      </if>
+      <if test="fineStatus != null" >
+        fine_status,
+      </if>
+      <if test="fineNumber != null" >
+        fine_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        #{logId,jdbcType=INTEGER},
+      </if>
+      <if test="bookId != null" >
+        #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="bookBorrowBy != null" >
+        #{bookBorrowBy,jdbcType=INTEGER},
+      </if>
+      <if test="bookBorrowTime != null" >
+        #{bookBorrowTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bookReturnTime != null" >
+        #{bookReturnTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bookBorrowStatus != null" >
+        #{bookBorrowStatus,jdbcType=INTEGER},
+      </if>
+      <if test="permitMoneyStatus != null" >
+        #{permitMoneyStatus,jdbcType=INTEGER},
+      </if>
+      <if test="permitMoneyNumber != null" >
+        #{permitMoneyNumber,jdbcType=DECIMAL},
+      </if>
+      <if test="fineStatus != null" >
+        #{fineStatus,jdbcType=INTEGER},
+      </if>
+      <if test="fineNumber != null" >
+        #{fineNumber,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lib.management.model.BookBorrowLog" >
+    update book_borrow_log
+    <set >
+      <if test="bookId != null" >
+        book_id = #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="bookBorrowBy != null" >
+        book_borrow_by = #{bookBorrowBy,jdbcType=INTEGER},
+      </if>
+      <if test="bookBorrowTime != null" >
+        book_borrow_time = #{bookBorrowTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bookReturnTime != null" >
+        book_return_time = #{bookReturnTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bookBorrowStatus != null" >
+        book_borrow_status = #{bookBorrowStatus,jdbcType=INTEGER},
+      </if>
+      <if test="permitMoneyStatus != null" >
+        permit_money_status = #{permitMoneyStatus,jdbcType=INTEGER},
+      </if>
+      <if test="permitMoneyNumber != null" >
+        permit_money_number = #{permitMoneyNumber,jdbcType=DECIMAL},
+      </if>
+      <if test="fineStatus != null" >
+        fine_status = #{fineStatus,jdbcType=INTEGER},
+      </if>
+      <if test="fineNumber != null" >
+        fine_number = #{fineNumber,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where log_id = #{logId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lib.management.model.BookBorrowLog" >
+    update book_borrow_log
+    set book_id = #{bookId,jdbcType=INTEGER},
+      book_borrow_by = #{bookBorrowBy,jdbcType=INTEGER},
+      book_borrow_time = #{bookBorrowTime,jdbcType=TIMESTAMP},
+      book_return_time = #{bookReturnTime,jdbcType=TIMESTAMP},
+      book_borrow_status = #{bookBorrowStatus,jdbcType=INTEGER},
+      permit_money_status = #{permitMoneyStatus,jdbcType=INTEGER},
+      permit_money_number = #{permitMoneyNumber,jdbcType=DECIMAL},
+      fine_status = #{fineStatus,jdbcType=INTEGER},
+      fine_number = #{fineNumber,jdbcType=DECIMAL}
+    where log_id = #{logId,jdbcType=INTEGER}
+  </update>
+</mapper>
