@@ -14,11 +14,6 @@ public class BookManagerServiceImpl implements BookManagerService {
 
     @Override
     public BookManager getBookManagerInfoByName(String name) {
-        BookManager bookManager = bookManagerMapper.selectByManagerName(name);
-        if(bookManager.getBookManagerName().equals("")){
-            return null;
-        }else{
-            return bookManager;
-        }
+        return bookManagerMapper.selectByManagerName(name);
     }
 }

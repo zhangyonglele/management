@@ -7,7 +7,7 @@ public interface BookInfoService {
 
     boolean updateBookInfo(BookInfo bookInfo);
 
-    BookInfo getBookInfobByBookName(String bookName);
+    BookInfo getBookInfoByBookName(String bookName);
 
-    boolean removeABookInfo(BookInfo bookInfo);
+    boolean updateABookInfoStatus(int bookInfoId,int bookInfoStatus);
 }

@@ -23,6 +23,12 @@
     from book_info
     where book_info_id = #{bookInfoId,jdbcType=INTEGER}
   </select>
+  <select id="selectByBookName" resultMap="BaseResultMap" parameterType="java.lang.String">
+      select
+      <include refid="Base_Column_List"/>
+      from book_info
+      where book_name = #{bookName,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from book_info
     where book_info_id = #{bookInfoId,jdbcType=INTEGER}
@@ -149,5 +155,10 @@
       book_copy_number = #{bookCopyNumber,jdbcType=INTEGER},
       book_status = #{bookStatus,jdbcType=INTEGER}
     where book_info_id = #{bookInfoId,jdbcType=INTEGER}
+  </update>
+  <update id="updateBookStatusById">
+      update book_info
+      set book_status = #{bookInfoStatus,jdbcType=INTEGER}
+      where book_info_id = #{bookInfoId,jdbcType=INTEGER}
   </update>
 </mapper>
