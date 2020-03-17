@@ -1,5 +1,6 @@
 package com.lib.management.controller;
 
+import com.lib.management.filter.annotation.LoginRequire;
 import com.lib.management.model.BookManager;
 import com.lib.management.service.BookManagerService;
 import com.lib.management.util.UniversalResponseBody;
@@ -25,6 +26,13 @@ public class BookManagerController {
         }else{
             return new UniversalResponseBody(-1,"auth refuse");
         }
+    }
+
+    @PostMapping("/librarian/logout")
+    @LoginRequire("librarian")
+    public UniversalResponseBody logout(HttpSession session){
+        session.invalidate();
+        return new UniversalResponseBody(0,"success");
     }
 
 }

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lib.management.mapper.BookInfoResponseMapper" >
+<resultMap id="BaseResultMap" type="com.lib.management.dto.BookInfoResponse" >
+        <id column="book_info_id" property="bookInfoId" jdbcType="INTEGER" />
+        <result column="book_type_mark" property="bookType" jdbcType="VARCHAR" />
+        <result column="book_type_name" property="bookTypeName" jdbcType="VARCHAR"/>
+        <result column="book_type_code" property="bookTypeCode" jdbcType="INTEGER" />
+        <result column="book_name" property="bookName" jdbcType="VARCHAR" />
+        <result column="book_price" property="bookPrice" jdbcType="VARCHAR" />
+        <result column="book_author" property="bookAuthor" jdbcType="VARCHAR" />
+        <result column="book_publisher" property="bookPublisher" jdbcType="VARCHAR" />
+        <result column="book_manager_name" property="createBy" jdbcType="VARCHAR" />
+        <result column="book_copy_number" property="bookCopyNumber" jdbcType="INTEGER" />
+</resultMap>
+<sql id="Base_Column_List" >
+        book_info_id, book_type_mark, book_type_name,book_type_code, book_name, book_price, book_author, book_publisher,
+        book_manager_name, book_copy_number
+</sql>
+<select id="selectBookInfoById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from (book_info left join book_type on book_info.book_type = book_type.book_type_id)
+              left join book_manager on book_info.create_by = book_manager.book_manager_id
+        where book_info_id = #{bookInfoId,jdbcType=INTEGER}
+</select>
+        <select id="selectBooksInfoByBookName" resultMap="BaseResultMap" parameterType="java.lang.String">
+                select
+                <include refid="Base_Column_List"/>
+                from (book_info left join book_type on book_info.book_type = book_type.book_type_id)
+                left join book_manager on book_info.create_by = book_manager.book_manager_id
+                where book_name = #{bookName,jdbcType=VARCHAR}
+        </select>
+</mapper>

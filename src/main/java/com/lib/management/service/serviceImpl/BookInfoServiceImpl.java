@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -30,16 +31,24 @@ public class BookInfoServiceImpl implements BookInfoService {
 
     @Override
     public boolean updateBookInfo(BookInfo bookInfo) {
-        return bookInfoMapper.updateByPrimaryKey(bookInfo) > 0;
+        return bookInfoMapper.updateByPrimaryKeySelective(bookInfo) > 0;
     }
 
     @Override
-    public BookInfo getBookInfoByBookName(String bookName) {
+    public List<BookInfo> getBookInfoByBookName(String bookName) {
         return bookInfoMapper.selectByBookName(bookName);
     }
 
     @Override
+    public BookInfo getBookInfoById(int id) {
+        return bookInfoMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
     public boolean updateABookInfoStatus(int bookInfoId,int bookInfoStatus) {
+        if(bookInfoMapper.selectByPrimaryKey(bookInfoId).getBookCopyNumber() > 0){
+            return false;
+        }
         Map<String,Object> params = new HashMap<>();
         params.put("bookInfoStatus",bookInfoStatus);
         params.put("bookInfoId",bookInfoId);

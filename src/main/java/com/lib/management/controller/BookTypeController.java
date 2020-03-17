@@ -20,7 +20,7 @@ public class BookTypeController {
     private BookTypeService bookTypeService;
 
     @PostMapping("/librarian/bookType/add")
-    //@LoginRequire("librarian")
+    @LoginRequire("librarian")
     public UniversalResponseBody addNewBookType(@RequestParam("bookTypeMark") String bookTypeMark,
                                                 @RequestParam("bookTypeName") String bookTypeName,
                                                 HttpSession session){

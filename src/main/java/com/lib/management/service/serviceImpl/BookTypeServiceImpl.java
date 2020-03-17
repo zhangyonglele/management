@@ -42,7 +42,7 @@ public class BookTypeServiceImpl implements BookTypeService {
     @Override
     public int incrBookTypeCode(int bookTypeId) {
         //lock.lock();
-        BookType bookType = bookTypeMapper.selectByPrimaryKey(1);
+        BookType bookType = bookTypeMapper.selectByPrimaryKey(bookTypeId);
         bookType.setLargestCode(bookType.getLargestCode()+1);
         try {
             bookTypeMapper.updateByPrimaryKey(bookType);

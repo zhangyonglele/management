@@ -2,6 +2,7 @@ package com.lib.management.mapper;
 
 import com.lib.management.model.BookInfo;
 
+import java.util.List;
 import java.util.Map;
 
 public interface BookInfoMapper {
@@ -11,7 +12,7 @@ public interface BookInfoMapper {
 
     int insertSelective(BookInfo record);
 
-    BookInfo selectByBookName(String bookName);
+    List<BookInfo> selectByBookName(String bookName);
 
     BookInfo selectByPrimaryKey(Integer bookInfoId);
 
