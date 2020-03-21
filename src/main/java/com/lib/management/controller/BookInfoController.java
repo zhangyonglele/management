@@ -59,12 +59,13 @@ public class BookInfoController {
         );
     }
 
-    @GetMapping("/books/info/name/{name}")
-    public UniversalResponseBody getBookInfoByName(@PathVariable("name")String bookName){
+    @GetMapping("/books/info/name/{name}/page/{page}")
+    public UniversalResponseBody getBookInfoByName(@PathVariable("name")String bookName,
+                                                   @PathVariable("page")int page){
         return new UniversalResponseBody<>(
                 0,
                 "success",
-                bookInfoResponseService.getBooksInfoByBookName(bookName)
+                bookInfoResponseService.getBooksInfoByBookName(bookName,page)
         );
     }
 
