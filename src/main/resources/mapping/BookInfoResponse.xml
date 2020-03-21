@@ -31,4 +31,25 @@
                 left join book_manager on book_info.create_by = book_manager.book_manager_id
                 where book_name = #{bookName,jdbcType=VARCHAR} limit #{pageNumber},17
         </select>
+        <select id="searchBy" resultMap="BaseResultMap">
+                select
+                <include refid="Base_Column_List"/>
+                from (book_info left join book_type on book_info.book_type = book_type.book_type_id)
+                left join book_manager on book_info.create_by = book_manager.book_manager_id
+                <where>
+                        <if test="bookName != null">
+                                book_name = #{bookName,jdbcType=VARCHAR}
+                        </if>
+                        <if test="bookTypeMark != null">
+                                AND book_type_mark = #{bookTypeMark,jdbcType=VARCHAR}
+                        </if>
+                        <if test="bookAuthor != null">
+                                AND book_author = #{bookAuthor,jdbcType=VARCHAR}
+                        </if>
+                        <if test="bookPublisher != null">
+                                AND book_publisher = #{bookPublisher,jdbcType=VARCHAR}
+                        </if>
+                </where>
+                limit #{pageNumber},17
+        </select>
 </mapper>

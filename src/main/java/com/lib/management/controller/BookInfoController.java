@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @Slf4j
@@ -92,4 +94,28 @@ public class BookInfoController {
             return new UniversalResponseBody(-1,"error");
         }
     }
+
+    @GetMapping("/searchBy")
+    public UniversalResponseBody searchBy(@RequestParam(value = "bookName",required = false)String bookName,
+                                          @RequestParam(value = "bookTypeMark",required = false)String bookTypeMark,
+                                          @RequestParam(value = "bookAuthor",required = false) String bookAuthor,
+                                          @RequestParam(value = "bookPublisher",required = false)String bookPublisher,
+                                          @RequestParam(value = "page") int page){
+        Map<String,Object> multParams = new HashMap<>();
+        if(bookName != null){
+            multParams.put("bookName",bookName);
+        }
+        if(bookTypeMark != null){
+            multParams.put("bookTypeMark",bookTypeMark);
+        }
+        if(bookAuthor != null){
+            multParams.put("bookAuthor",bookAuthor);
+        }
+        if(bookPublisher != null){
+            multParams.put("bookPublisher",bookPublisher);
+        }
+        multParams.put("pageNumber",(page-1) * 17);
+        return new UniversalResponseBody<>(0,"success",bookInfoResponseService.searchByMultParams(multParams));
+    }
+
 }

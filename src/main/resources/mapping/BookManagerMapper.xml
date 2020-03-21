@@ -112,4 +112,9 @@
       active_status = #{activeStatus,jdbcType=INTEGER}
     where book_manager_id = #{bookManagerId,jdbcType=INTEGER}
   </update>
+  <update id="updateManagerStatus" >
+    update book_manager
+    set active_status = #{futureStatus,jdbcType=INTEGER}
+    where book_manager_name = #{bookManagerName,jdbcType=VARCHAR}
+  </update>
 </mapper>

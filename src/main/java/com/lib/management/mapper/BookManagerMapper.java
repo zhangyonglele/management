@@ -2,6 +2,8 @@ package com.lib.management.mapper;
 
 import com.lib.management.model.BookManager;
 
+import java.util.Map;
+
 public interface BookManagerMapper {
     int deleteByPrimaryKey(Integer bookManagerId);
 
@@ -16,4 +18,6 @@ public interface BookManagerMapper {
     int updateByPrimaryKeySelective(BookManager record);
 
     int updateByPrimaryKey(BookManager record);
+
+    int updateManagerStatus(Map<String,Object> paramsMap);
 }

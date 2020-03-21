@@ -11,7 +11,7 @@ server:
 
 spring:
   profiles:
-    active: online
+    active: dev
 
 mybatis:
   type-aliases-package: com/lib/management/model

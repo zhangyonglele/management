@@ -9,4 +9,6 @@ public interface BookInfoResponseMapper {
     BookInfoResponse selectBookInfoById(int bookInfoId);
 
     List<BookInfoResponse> selectBooksInfoByBookName(Map<String,Object> data);
+
+    List<BookInfoResponse> searchBy(Map<String,Object> searchParams);
 }

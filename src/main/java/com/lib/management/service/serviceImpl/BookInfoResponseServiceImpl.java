@@ -27,4 +27,9 @@ public class BookInfoResponseServiceImpl implements BookInfoResponseService {
         map.put("pageNumber",(page-1) * 17);
         return bookInfoResponseMapper.selectBooksInfoByBookName(map);
     }
+
+    @Override
+    public List<BookInfoResponse> searchByMultParams(Map<String, Object> params) {
+        return bookInfoResponseMapper.searchBy(params);
+    }
 }

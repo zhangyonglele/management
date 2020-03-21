@@ -5,10 +5,7 @@ import com.lib.management.model.BookManager;
 import com.lib.management.service.BookManagerService;
 import com.lib.management.util.UniversalResponseBody;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -23,7 +20,7 @@ public class BookManagerController {
     @PostMapping("/librarian/login")
     public UniversalResponseBody login(String userName, String password, HttpSession session){
         BookManager bookManager = bookManagerService.getBookManagerInfoByName(userName);
-        if(bookManager != null  && bookManager.getBookManagerPassword().equals(password)){
+        if(bookManager != null  && bookManager.getActiveStatus() == 1 && bookManager.getBookManagerPassword().equals(password)){
             session.setAttribute("auth","librarian");
             session.setAttribute("userInfo",bookManager);
             return new UniversalResponseBody(0,"success");
@@ -38,6 +35,17 @@ public class BookManagerController {
     public UniversalResponseBody logout(HttpSession session){
         session.invalidate();
         return new UniversalResponseBody(0,"success");
+    }
+    
+    @PutMapping("/librarian/find")
+    public UniversalResponseBody findBackPasswordRequire(String userName){
+        // TODO: 2020/3/22 这里实际上实现密码找回后，会冻结账户，账户将会无法登录，这个功能实现与否有待商榷
+        // TODO: 2020/3/22 实现思路，使用redis作为消息队列，在检查用户登录状态时检查redis中是否拥有某个对某用户的更新操作，如果有，则销毁该session，并拒绝该用户的权限越界请求
+        if(bookManagerService.changeManagerAccountStatus(userName,2)){
+            return new UniversalResponseBody(0,"success");
+        }else{
+            return new UniversalResponseBody<>(-1,"error","该账户可能不存在");
+        }
     }
 
 }
