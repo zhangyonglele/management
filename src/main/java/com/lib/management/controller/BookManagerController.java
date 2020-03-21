@@ -4,6 +4,8 @@ import com.lib.management.filter.annotation.LoginRequire;
 import com.lib.management.model.BookManager;
 import com.lib.management.service.BookManagerService;
 import com.lib.management.util.UniversalResponseBody;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +14,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 @RestController
+@Slf4j
+@CrossOrigin
 public class BookManagerController {
     @Resource
     private BookManagerService bookManagerService;
@@ -24,6 +28,7 @@ public class BookManagerController {
             session.setAttribute("userInfo",bookManager);
             return new UniversalResponseBody(0,"success");
         }else{
+            log.warn("[WARRING CHECK] userName "+userName+",password " +password);
             return new UniversalResponseBody(-1,"auth refuse");
         }
     }

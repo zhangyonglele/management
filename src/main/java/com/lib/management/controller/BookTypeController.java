@@ -15,6 +15,7 @@ import java.util.Date;
 
 @RestController
 @Slf4j
+@CrossOrigin
 public class BookTypeController {
     @Resource
     private BookTypeService bookTypeService;

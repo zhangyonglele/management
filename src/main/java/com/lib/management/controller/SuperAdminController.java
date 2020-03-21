@@ -4,6 +4,7 @@ import com.lib.management.filter.annotation.LoginRequire;
 import com.lib.management.model.SuperAdmin;
 import com.lib.management.service.SuperAdminService;
 import com.lib.management.util.UniversalResponseBody;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,6 +12,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 @RestController
+@CrossOrigin
 public class SuperAdminController {
     @Resource
     private SuperAdminService superAdminService;

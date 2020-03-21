@@ -1,6 +1,7 @@
 package com.lib.management.filter;
 
 import com.lib.management.filter.annotation.LoginRequire;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -15,6 +16,7 @@ import java.lang.reflect.Method;
  * 配置拦截器，拦截非登录权限越界
  */
 @Component
+@Slf4j
 public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -35,6 +37,8 @@ public class LoginInterceptor implements HandlerInterceptor {
                     return true;
                 }else{
                     //如果权限越界，则拒绝请求
+                    log.warn("[WARRING CHECK]No auth try to access!");
+                    response.setStatus(403);
                     response.setContentType("application/json;charset=UTF-8");
                     response.getWriter().write("{\"errCode\":-1,\"msg\":\"auth refuse\"}");
                     return false;

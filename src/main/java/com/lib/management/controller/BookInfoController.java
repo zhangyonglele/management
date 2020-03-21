@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 @RestController
 @Slf4j
+@CrossOrigin
 public class BookInfoController {
     @Resource
     private BookInfoService bookInfoService;
