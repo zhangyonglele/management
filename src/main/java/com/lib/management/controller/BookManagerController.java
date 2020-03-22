@@ -3,6 +3,7 @@ package com.lib.management.controller;
 import com.lib.management.filter.annotation.LoginRequire;
 import com.lib.management.model.BookManager;
 import com.lib.management.service.BookManagerService;
+import com.lib.management.service.UserService;
 import com.lib.management.util.UniversalResponseBody;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,9 @@ import javax.servlet.http.HttpSession;
 public class BookManagerController {
     @Resource
     private BookManagerService bookManagerService;
+
+    @Resource
+    private UserService userService;
 
     @PostMapping("/librarian/login")
     public UniversalResponseBody login(String userName, String password, HttpSession session){
@@ -45,6 +49,23 @@ public class BookManagerController {
             return new UniversalResponseBody(0,"success");
         }else{
             return new UniversalResponseBody<>(-1,"error","该账户可能不存在");
+        }
+    }
+
+    @GetMapping("/librarian/init/reader/{page}")
+    @LoginRequire("librarian")
+    public UniversalResponseBody getUninitReadersAccount(@PathVariable int page){
+        return new UniversalResponseBody<>(0,"success",userService.getUninitReaderAccount(page));
+    }
+
+    @PutMapping("/librarian/init")
+    @LoginRequire("librarian")
+    public UniversalResponseBody initReaderAccount(int readerId,HttpSession session){
+        BookManager bookManager = (BookManager)session.getAttribute("userInfo");
+        if(userService.initReaderAccountByReaderId(readerId,bookManager.getBookManagerId())) {
+            return new UniversalResponseBody(0,"success");
+        }else{
+            return new UniversalResponseBody(-1,"error");
         }
     }
 
