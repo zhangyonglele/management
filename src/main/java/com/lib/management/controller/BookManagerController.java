@@ -2,6 +2,7 @@ package com.lib.management.controller;
 
 import com.lib.management.filter.annotation.LoginRequire;
 import com.lib.management.model.BookManager;
+import com.lib.management.model.User;
 import com.lib.management.service.BookManagerService;
 import com.lib.management.service.UserService;
 import com.lib.management.util.UniversalResponseBody;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -40,7 +42,7 @@ public class BookManagerController {
         session.invalidate();
         return new UniversalResponseBody(0,"success");
     }
-    
+
     @PutMapping("/librarian/find")
     public UniversalResponseBody findBackPasswordRequire(String userName){
         // TODO: 2020/3/22 这里实际上实现密码找回后，会冻结账户，账户将会无法登录，这个功能实现与否有待商榷
@@ -54,7 +56,7 @@ public class BookManagerController {
 
     @GetMapping("/librarian/init/reader/{page}")
     @LoginRequire("librarian")
-    public UniversalResponseBody getUninitReadersAccount(@PathVariable int page){
+    public UniversalResponseBody<List<User>> getUninitReadersAccount(@PathVariable int page){
         return new UniversalResponseBody<>(0,"success",userService.getUninitReaderAccount(page));
     }
 

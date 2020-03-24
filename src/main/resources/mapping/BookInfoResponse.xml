@@ -24,7 +24,7 @@
               left join book_manager on book_info.create_by = book_manager.book_manager_id
         where book_info_id = #{bookInfoId,jdbcType=INTEGER}
 </select>
-        <select id="selectBooksInfoByBookName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        <select id="selectBooksInfoByBookName" resultMap="BaseResultMap">
                 select
                 <include refid="Base_Column_List"/>
                 from (book_info left join book_type on book_info.book_type = book_type.book_type_id)
