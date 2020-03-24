@@ -3,7 +3,7 @@ package com.lib.management.dto;
 import com.lib.management.model.BookInfo;
 import lombok.Data;
 
-@Data
+
 public class BookInfoHelper {
 
     private Integer bookType;
@@ -15,6 +15,46 @@ public class BookInfoHelper {
     private String bookAuthor;
 
     private String bookPublisher;
+
+    public Integer getBookType() {
+        return bookType;
+    }
+
+    public void setBookType(Integer bookType) {
+        this.bookType = bookType;
+    }
+
+    public String getBookName() {
+        return bookName;
+    }
+
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
+    }
+
+    public String getBookPrice() {
+        return bookPrice;
+    }
+
+    public void setBookPrice(String bookPrice) {
+        this.bookPrice = bookPrice;
+    }
+
+    public String getBookAuthor() {
+        return bookAuthor;
+    }
+
+    public void setBookAuthor(String bookAuthor) {
+        this.bookAuthor = bookAuthor;
+    }
+
+    public String getBookPublisher() {
+        return bookPublisher;
+    }
+
+    public void setBookPublisher(String bookPublisher) {
+        this.bookPublisher = bookPublisher;
+    }
 
     public BookInfo toBookInfo(){
         BookInfo res = new BookInfo();

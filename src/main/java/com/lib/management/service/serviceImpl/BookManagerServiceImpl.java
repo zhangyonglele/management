@@ -1,5 +1,6 @@
 package com.lib.management.service.serviceImpl;
 
+import com.lib.management.dto.BookManagerHelper;
 import com.lib.management.mapper.BookManagerMapper;
 import com.lib.management.model.BookManager;
 import com.lib.management.service.BookManagerService;
@@ -25,5 +26,19 @@ public class BookManagerServiceImpl implements BookManagerService {
         params.put("bookManagerName",userName);
         params.put("futureStatus",futureStatus);
         return bookManagerMapper.updateManagerStatus(params) > 0;
+    }
+
+    @Override
+    public boolean registerForNewManager(BookManagerHelper bookManagerHelper) {
+        BookManager manager = bookManagerHelper.toBookManager();
+        manager.setActiveStatus(0);
+        boolean flag = false;
+        try{
+            bookManagerMapper.insert(manager);
+            flag = true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return flag;
     }
 }

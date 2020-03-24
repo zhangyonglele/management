@@ -15,7 +15,7 @@ import java.util.Date;
 
 @RestController
 @Slf4j
-@CrossOrigin
+@CrossOrigin(allowCredentials = "true",origins = {"http://localhost:8081","*"})
 public class BookTypeController {
     @Resource
     private BookTypeService bookTypeService;

@@ -18,7 +18,7 @@ import java.util.Map;
 
 @RestController
 @Slf4j
-@CrossOrigin
+@CrossOrigin(allowCredentials = "true",origins = {"http://localhost:8081","*"})
 public class BookInfoController {
     @Resource
     private BookInfoService bookInfoService;
@@ -31,13 +31,14 @@ public class BookInfoController {
 
     @PostMapping("/book/info")
     @LoginRequire("librarian")
-    public UniversalResponseBody addNewBookInfo(BookInfoHelper bookInfoHelper, HttpSession session){
+    public UniversalResponseBody addNewBookInfo(BookInfoHelper bookInfoHelper,HttpSession session){
         BookInfo bookInfo = bookInfoHelper.toBookInfo();
         //log.info("post func");
         BookManager bookManager = (BookManager)session.getAttribute("userInfo");
         bookInfo.setCreateBy(bookManager.getBookManagerId());
         bookInfo.setBookCopyNumber(0);
         bookInfo.setBookStatus(1);
+        log.warn(""+bookInfo.getBookType()+"hello"+bookInfo.getBookAuthor());
         bookInfo.setBookTypeCode(bookTypeService
                 .incrBookTypeCode(
                         bookInfo.getBookType()

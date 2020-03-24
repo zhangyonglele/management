@@ -1,5 +1,6 @@
 package com.lib.management.controller;
 
+import com.lib.management.dto.BookManagerHelper;
 import com.lib.management.filter.annotation.LoginRequire;
 import com.lib.management.model.BookManager;
 import com.lib.management.model.User;
@@ -15,7 +16,7 @@ import java.util.List;
 
 @RestController
 @Slf4j
-@CrossOrigin
+@CrossOrigin(allowCredentials = "true",origins = "http://localhost:8081")
 public class BookManagerController {
     @Resource
     private BookManagerService bookManagerService;
@@ -71,4 +72,12 @@ public class BookManagerController {
         }
     }
 
+    @PostMapping("/librarian/register")
+    public UniversalResponseBody<Object> register(BookManagerHelper bookManagerHelper){
+        if(bookManagerService.registerForNewManager(bookManagerHelper)){
+            return new UniversalResponseBody<>(0,"success");
+        }else{
+            return new UniversalResponseBody<>(-1,"error");
+        }
+    }
 }
