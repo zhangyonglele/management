@@ -1,6 +1,7 @@
 package com.lib.management.controller;
 
 import com.lib.management.dto.UserHelper;
+import com.lib.management.dto.UserInfoHelper;
 import com.lib.management.filter.annotation.LoginRequire;
 import com.lib.management.model.User;
 import com.lib.management.service.UserService;
@@ -44,13 +45,13 @@ public class UserController {
     }
 
     //从请求中获得UserHelper对象 @Data注解
-    @PostMapping("/reader")
+    @PostMapping("/reader/register")
     public UniversalResponseBody addUser(UserHelper userHelper){
         User user = userHelper.toUser();
+
         user.setCreateTime(new Date());
-        //数据库中CreateBy不能为空？如何设置？
+        user.setCreateBy(null);
         user.setUserStatus(0);
-        //TODO:保证金何时交？在哪里设定？
         user.setPermitStatus(0);
         if(userService.addNewUser(user))
             return new UniversalResponseBody(0,"success");
@@ -62,15 +63,16 @@ public class UserController {
     @LoginRequire("reader")
     public UniversalResponseBody getUserInfo(HttpSession session){
         User user = (User)session.getAttribute("userInfo");
-        return new UniversalResponseBody(0,"success",user);
+        UserInfoHelper userInfoHelper = new UserInfoHelper(user);
+        return new UniversalResponseBody(0,"success",userInfoHelper);
     }
 
-    //更改密码需强制退出登陆？区分不同的属性？
+    //不可修改userID
     @PutMapping("/reader/info")
     @LoginRequire("reader")
-    public UniversalResponseBody setUserInfo(HttpSession session,UserHelper userHelper){
+    public UniversalResponseBody setUserInfo(HttpSession session,UserInfoHelper userInfoHelper){
         Integer userID = ((User)session.getAttribute("userInfo")).getUserId();
-        if(userService.setUserInfoByUserID(userID,userHelper))
+        if(userService.setUserInfoByUserID(userID,userInfoHelper))
             return new UniversalResponseBody(0,"success");
         else
             return new UniversalResponseBody(-1,"error");

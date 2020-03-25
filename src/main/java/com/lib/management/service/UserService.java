@@ -1,7 +1,6 @@
 package com.lib.management.service;
 
-import com.lib.management.dto.UserHelper;
-import com.lib.management.model.BookManager;
+import com.lib.management.dto.UserInfoHelper;
 import com.lib.management.model.User;
 
 import java.util.List;
@@ -12,7 +11,7 @@ public interface UserService {
 
     User getUserInfoByName(String name);
 
-    boolean setUserInfoByUserID(Integer userID, UserHelper userHelper);
+    boolean setUserInfoByUserID(Integer userID, UserInfoHelper userInfoHelper);
 
     List<User> getUninitReaderAccount(int page);
 
