@@ -1,5 +1,6 @@
 package com.lib.management.service.serviceImpl;
 
+import com.lib.management.dto.UserHelper;
 import com.lib.management.mapper.UserMapper;
 import com.lib.management.model.User;
 import com.lib.management.service.UserService;
@@ -15,8 +16,30 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
+    public boolean addNewUser(User user) {
+        boolean flag = false;
+        try{
+            userMapper.insert(user);
+            flag = true;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
+    @Override
     public User getUserInfoByName(String name) {
         return userMapper.selectByUserName(name);
+    }
+
+    @Override
+    public boolean setUserInfoByUserID(Integer userID, UserHelper userHelper) {
+       User user = userHelper.toUser();
+       user.setUserId(userID);
+       if(userMapper.updateByPrimaryKeySelective(user)>0)
+           return true;
+       else
+           return false;
     }
 
     @Override
