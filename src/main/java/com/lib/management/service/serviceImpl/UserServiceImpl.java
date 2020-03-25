@@ -15,6 +15,11 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
+    public User getUserInfoByName(String name) {
+        return userMapper.selectByUserName(name);
+    }
+
+    @Override
     public List<User> getUninitReaderAccount(int page) {
         return userMapper.selectUninitReadersAccount((page-1)*10);
     }
