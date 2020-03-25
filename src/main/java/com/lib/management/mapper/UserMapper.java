@@ -13,6 +13,8 @@ public interface UserMapper {
 
     User selectByPrimaryKey(Integer userId);
 
+    User selectByUserName(String name);
+
     List<User> selectUninitReadersAccount(int pageNumber);
 
     int updateByPrimaryKeySelective(User record);
