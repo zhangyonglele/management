@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @Slf4j
-@CrossOrigin(allowCredentials = "true",origins = "http://localhost:8081")
+@CrossOrigin(allowCredentials = "true",origins = {"http://localhost:8081","*"})
 public class BookManagerController {
     @Resource
     private BookManagerService bookManagerService;
