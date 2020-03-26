@@ -22,11 +22,15 @@ public class BookServiceImpl implements BookService {
         books.setBookBorrowUpdateTime(currentDate);
         books.setBookActiveStatus(1);
         boolean flag = false;
-        try{
-            booksMapper.insert(books);
-            flag = true;
-        }catch (Exception e){
-            e.printStackTrace();
+        // TODO: 2020/3/25 这里有问题 
+        while(number > 0){
+            try{
+                booksMapper.insert(books);
+                flag = true;
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            number--;
         }
         return flag;
     }
