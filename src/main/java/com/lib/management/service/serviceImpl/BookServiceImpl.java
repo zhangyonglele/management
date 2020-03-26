@@ -35,4 +35,16 @@ public class BookServiceImpl implements BookService {
     public boolean updateBookInfo(Books books) {
         return false;
     }
+    //查找图书
+    @Override
+    public Books queryBook(Integer bookId) {
+        Books book = booksMapper.selectByPrimaryKey(bookId);
+        return book;
+    }
+
+    @Override
+    public Integer updateBook(Books book) {
+        int i = booksMapper.updateByPrimaryKey(book);
+        return i;
+    }
 }
