@@ -1,7 +1,9 @@
 package com.lib.management.service.serviceImpl;
 
 import com.lib.management.dto.BookInfoResponse;
+import com.lib.management.mapper.BookInfoMapper;
 import com.lib.management.mapper.BookInfoResponseMapper;
+import com.lib.management.model.BookInfo;
 import com.lib.management.service.BookInfoResponseService;
 import org.springframework.stereotype.Service;
 
@@ -32,4 +34,5 @@ public class BookInfoResponseServiceImpl implements BookInfoResponseService {
     public List<BookInfoResponse> searchByMultParams(Map<String, Object> params) {
         return bookInfoResponseMapper.searchBy(params);
     }
+
 }
