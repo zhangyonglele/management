@@ -11,4 +11,6 @@ public interface BookInfoResponseService {
     List<BookInfoResponse> getBooksInfoByBookName(String bookName,int page);
 
     List<BookInfoResponse> searchByMultParams(Map<String,Object> params);
+
+
 }

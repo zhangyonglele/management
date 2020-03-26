@@ -14,4 +14,5 @@ public interface BookBorrowLogMapper {
     int updateByPrimaryKeySelective(BookBorrowLog record);
 
     int updateByPrimaryKey(BookBorrowLog record);
+
 }

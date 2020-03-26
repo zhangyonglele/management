@@ -14,4 +14,6 @@ public interface BookInfoService {
     BookInfo getBookInfoById(int id);
 
     boolean updateABookInfoStatus(int bookInfoId,int bookInfoStatus);
+
+
 }

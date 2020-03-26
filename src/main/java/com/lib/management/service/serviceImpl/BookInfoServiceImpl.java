@@ -1,6 +1,8 @@
 package com.lib.management.service.serviceImpl;
 
+import com.lib.management.mapper.BookBorrowLogMapper;
 import com.lib.management.mapper.BookInfoMapper;
+import com.lib.management.model.BookBorrowLog;
 import com.lib.management.model.BookInfo;
 import com.lib.management.service.BookInfoService;
 import lombok.extern.slf4j.Slf4j;
@@ -54,4 +56,5 @@ public class BookInfoServiceImpl implements BookInfoService {
         params.put("bookInfoId",bookInfoId);
         return bookInfoMapper.updateBookStatusById(params) > 0;
     }
+
 }

@@ -50,7 +50,7 @@ public class BookInfoController {
         }
 
     }
-
+    //读者根据书id获取查询信息
     @GetMapping("/book/info/id/{id}")
     public UniversalResponseBody getBookInfoById(@PathVariable("id") int bookId){
         log.info("get func");
@@ -60,7 +60,7 @@ public class BookInfoController {
                 bookInfoResponseService.getBookInfoByBookInfoId(bookId)
         );
     }
-
+//读者根据书名获取查询信息
     @GetMapping("/books/info/name/{name}/page/{page}")
     public UniversalResponseBody getBookInfoByName(@PathVariable("name")String bookName,
                                                    @PathVariable("page")int page){
