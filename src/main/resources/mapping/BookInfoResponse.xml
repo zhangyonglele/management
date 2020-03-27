@@ -49,6 +49,9 @@
                         <if test="bookPublisher != null">
                                 AND book_publisher = #{bookPublisher,jdbcType=VARCHAR}
                         </if>
+                        <if test="true">
+                                AND book_info.book_status = 1
+                        </if>
                 </where>
                 limit #{pageNumber},17
         </select>
