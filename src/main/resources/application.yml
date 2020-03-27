@@ -25,7 +25,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/manage_project?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT
     username: root
-    password: 19980516
+    password: 168168
   servlet:
     multipart:
       enabled: true
