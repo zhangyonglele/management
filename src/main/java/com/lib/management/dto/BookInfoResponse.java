@@ -2,6 +2,9 @@ package com.lib.management.dto;
 
 import lombok.Data;
 
+/**
+ * 部分淘汰，新功能请使用BookWithPic开发
+ */
 @Data
 public class BookInfoResponse {
     private int bookInfoId;

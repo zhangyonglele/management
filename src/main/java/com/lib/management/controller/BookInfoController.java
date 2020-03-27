@@ -52,7 +52,12 @@ public class BookInfoController {
 
     }
 
-    @GetMapping("/book/info/id/{id}")
+    /**
+     * 该方法被淘汰，对应getBookById
+     * @param bookId
+     * @return
+     */
+    //@GetMapping("/book/info/id/{id}")
     public UniversalResponseBody getBookInfoById(@PathVariable("id") int bookId){
         log.info("get func");
         return new UniversalResponseBody<>(
@@ -62,7 +67,14 @@ public class BookInfoController {
         );
     }
 
-    @GetMapping("/books/info/name/{name}/page/{page}")
+
+    /**
+     * 该方法被淘汰，对应于BookWithPicController中searchByBookName
+     * @param bookName
+     * @param page
+     * @return
+     */
+    //@GetMapping("/books/info/name/{name}/page/{page}")
     public UniversalResponseBody getBookInfoByName(@PathVariable("name")String bookName,
                                                    @PathVariable("page")int page){
         return new UniversalResponseBody<>(
@@ -96,7 +108,16 @@ public class BookInfoController {
         }
     }
 
-    @GetMapping("/searchBy")
+    /**
+     * 该功能被淘汰，对应BookWithPic中的searchBy方法
+     * @param bookName
+     * @param bookTypeMark
+     * @param bookAuthor
+     * @param bookPublisher
+     * @param page
+     * @return
+     */
+    //@GetMapping("/searchBy")
     public UniversalResponseBody searchBy(@RequestParam(value = "bookName",required = false)String bookName,
                                           @RequestParam(value = "bookTypeMark",required = false)String bookTypeMark,
                                           @RequestParam(value = "bookAuthor",required = false) String bookAuthor,

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lib.management.mapper.BookWithPicMapper">
+  <resultMap id="BaseResultMap" type="com.lib.management.dto.BookWithPic">
+    <result column="book_info_id" jdbcType="INTEGER" property="bookInfoId" />
+    <result column="book_name" jdbcType="VARCHAR" property="bookName" />
+    <result column="book_type_mark" jdbcType="VARCHAR" property="bookTypeMark" />
+    <result column="book_type_name" jdbcType="VARCHAR" property="bookTypeName" />
+    <result column="book_type_code" jdbcType="INTEGER" property="bookTypeCode" />
+    <result column="book_price" jdbcType="VARCHAR" property="bookPrice" />
+    <result column="book_author" jdbcType="VARCHAR" property="bookAuthor" />
+    <result column="book_publisher" jdbcType="VARCHAR" property="bookPublisher" />
+    <result column="book_copy_number" jdbcType="INTEGER" property="bookCopyNumber" />
+    <result column="picture_url" jdbcType="VARCHAR" property="pictureUrl" />
+    <result column="book_manager_name" jdbcType="VARCHAR"  property="bookManagerName"/>
+  </resultMap>
+
+  <select id="selectBookByBookInfoId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select *
+    from book_with_pic
+    where book_with_pic.book_info_id = #{bookInfoId}
+  </select>
+
+  <select id="selectBookByName" resultMap="BaseResultMap">
+    select *
+    from book_with_pic
+    where book_name = #{bookName,jdbcType=VARCHAR}
+    limit #{pageNumber},17
+  </select>
+
+  <select id="selectBookBy" resultMap="BaseResultMap">
+    select *
+    from book_with_pic
+    <where>
+      <if test="bookName != null">
+        book_name = #{bookName,jdbcType=VARCHAR}
+      </if>
+      <if test="bookTypeMarkList != null">
+        And book_type_mark in
+        <foreach collection="bookTypeMarkList" separator="," index="index" item="item" open="(" close=")">
+          #{item}
+        </foreach>
+      </if>
+      <if test="bookAuthor != null">
+        AND book_author = #{bookAuthor,jdbcType=VARCHAR}
+      </if>
+      <if test="bookPublisher != null">
+        AND book_publisher = #{bookPublisher,jdbcType=VARCHAR}
+      </if>
+      <if test="true">
+        AND book_status = 1
+      </if>
+    </where>
+    limit #{pageNumber},17
+  </select>
+</mapper>
