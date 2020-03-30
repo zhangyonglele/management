@@ -63,4 +63,12 @@ public class UserServiceImpl implements UserService {
             }
         }
     }
+
+    //修改用户信息
+    @Override
+    public User alterPersonInfo(User user) {
+        userMapper.updateByPrimaryKey(user);
+        User user1 = userMapper.selectByPrimaryKey(user.getUserId());
+        return user1;
+    }
 }

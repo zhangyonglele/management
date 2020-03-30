@@ -16,5 +16,5 @@ public interface BooksMapper {
     int updateByPrimaryKeySelective(Books record);
 
     int updateByPrimaryKey(Books record);
-
+    Books selectByBookInfoId(Integer bookInfoId);
 }
