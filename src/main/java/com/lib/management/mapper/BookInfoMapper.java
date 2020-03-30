@@ -12,6 +12,8 @@ public interface BookInfoMapper {
 
     int insertSelective(BookInfo record);
 
+    int getLastInsertId();
+
     List<BookInfo> selectByBookName(String bookName);
 
     BookInfo selectByPrimaryKey(Integer bookInfoId);

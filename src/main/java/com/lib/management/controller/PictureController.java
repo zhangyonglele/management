@@ -1,5 +1,6 @@
 package com.lib.management.controller;
 
+import com.lib.management.filter.annotation.LoginRequire;
 import com.lib.management.service.PictureService;
 import com.lib.management.util.UniversalResponseBody;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,6 +18,7 @@ public class PictureController {
     private PictureService pictureService;
 
     @PostMapping("/picture")
+    @LoginRequire("librarian")
     public UniversalResponseBody<Object> uploadPicture(@RequestParam("file") MultipartFile file,int bookId){
         if(pictureService.uploadPicture(file,bookId)){
             return new UniversalResponseBody<>(0,"success");

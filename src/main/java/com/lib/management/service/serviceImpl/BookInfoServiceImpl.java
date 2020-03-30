@@ -18,15 +18,15 @@ public class BookInfoServiceImpl implements BookInfoService {
     private BookInfoMapper bookInfoMapper;
 
     @Override
-    public boolean addNewBookInfo(BookInfo bookInfo) {
-        boolean flag = false;
+    public int addNewBookInfo(BookInfo bookInfo) {
+        int insertId = -1;
         try{
             bookInfoMapper.insert(bookInfo);
-            flag = true;
+            insertId = bookInfoMapper.getLastInsertId();
         }catch (Exception e){
             e.printStackTrace();
         }
-        return flag;
+        return insertId;
     }
 
     @Override

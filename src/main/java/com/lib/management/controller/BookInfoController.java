@@ -44,8 +44,9 @@ public class BookInfoController {
                         bookInfo.getBookType()
                 )
         );
-        if(bookInfoService.addNewBookInfo(bookInfo)){
-            return new UniversalResponseBody(0,"success");
+        int insertId = bookInfoService.addNewBookInfo(bookInfo);
+        if(insertId > 0){
+            return new UniversalResponseBody(0,"success",insertId);
         }else {
             return new UniversalResponseBody(-1,"error");
         }

@@ -5,7 +5,7 @@ import com.lib.management.model.BookInfo;
 import java.util.List;
 
 public interface BookInfoService {
-    boolean addNewBookInfo(BookInfo bookInfo);
+    int addNewBookInfo(BookInfo bookInfo);
 
     boolean updateBookInfo(BookInfo bookInfo);
 
@@ -14,4 +14,5 @@ public interface BookInfoService {
     BookInfo getBookInfoById(int id);
 
     boolean updateABookInfoStatus(int bookInfoId,int bookInfoStatus);
+
 }
