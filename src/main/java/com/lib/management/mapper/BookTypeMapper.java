@@ -18,4 +18,6 @@ public interface BookTypeMapper {
     int updateByPrimaryKeySelective(BookType record);
 
     int updateByPrimaryKey(BookType record);
+
+    int removeType(int typeId);
 }

@@ -9,6 +9,8 @@ public interface BookTypeService {
 
     boolean removeAOldType(int bookTypeId);
 
+    BookType getABookType(int bookTypeId);
+
     List<BookType> getAllType();
 
     boolean updateBookTypeByTypeId(BookType bookType);

@@ -103,4 +103,7 @@ public class BookBorrowLog {
     public void setFineNumber(BigDecimal fineNumber) {
         this.fineNumber = fineNumber;
     }
+
+
+
 }

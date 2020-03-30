@@ -27,10 +27,6 @@ public class BookTypeController {
                                                 HttpSession session){
         BookType newBookType = new BookType();
         BookManager bookManager = (BookManager)session.getAttribute("userInfo");
-        if(bookManager == null){
-            log.error("登录信息异常");
-            return new UniversalResponseBody<>(-1,"error");
-        }
         newBookType.setBookTypeMark(bookTypeMark);
         newBookType.setBookTypeName(bookTypeName);
         newBookType.setCreateBy(bookManager.getBookManagerId());
@@ -46,6 +42,18 @@ public class BookTypeController {
     @GetMapping("/bookTypes")
     public UniversalResponseBody getAllBookType(){
         return new UniversalResponseBody<>(0,"success",bookTypeService.getAllType());
+    }
+
+    @DeleteMapping("/bookType/{typeId}")
+    public UniversalResponseBody<Object> removeType(@PathVariable("typeId") int bookId){
+        if(bookTypeService.getABookType(bookId).getLargestCode() > 0 ){
+            return new UniversalResponseBody<>(-1,"error");
+        }
+        if(bookTypeService.removeAOldType(bookId)){
+            return new UniversalResponseBody<>(0,"success");
+        }else{
+            return new UniversalResponseBody<>(-1,"error");
+        }
     }
 
 

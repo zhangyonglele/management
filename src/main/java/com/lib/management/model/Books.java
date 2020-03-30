@@ -1,6 +1,8 @@
 package com.lib.management.model;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class Books {
     private Integer bookId;
@@ -141,5 +143,68 @@ public class Books {
 
     public void setBookActiveStatus(Integer bookActiveStatus) {
         this.bookActiveStatus = bookActiveStatus;
+    }
+
+
+
+    public void setBookBorrow(){
+        this.bookBorrowStatus = 1;
+    }
+
+    public void setBookPreOrdered(){
+        this.bookBorrowStatus = 4;
+    }
+
+    public void setBookReturned(){
+        this.bookBorrowStatus = 0;
+    }
+
+    public void setBookBackToSheet(){
+        this.bookBorrowStatus = 3;
+    }
+
+    public boolean canBorrow(){
+        if(this.bookBorrowStatus > 0){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    public boolean checkAndRefreshPreOrderActive(){
+        boolean flag = false;
+        if(this.bookBorrowStatus == 4){
+            //预约激活
+            flag = true;
+        }
+        Date now = new Date();
+        if(this.getBookBorrowStatus() == 4 && this.bookPreOrderPassTime.before(now)){
+            this.setBookBorrowStatus(0);
+            flag = false;
+        }
+        return flag;
+    }
+
+    public void initBookBorrowTime(){
+        Date now = new Date();
+        Calendar helper = Calendar.getInstance();
+        helper.setTime(now);
+        helper.add(Calendar.MONTH,1);
+        Date returnTime = helper.getTime();
+        this.bookBorrowedTime = now;
+        this.bookShouldReturnBefore = returnTime;
+        this.bookBorrowUpdateTime = now;
+    }
+
+    public BookBorrowLog toLog(){
+        BookBorrowLog log = new BookBorrowLog();
+        log.setBookBorrowBy(this.getBookBorrowBy());
+        log.setBookId(this.getBookId());
+        log.setBookBorrowTime(this.getBookBorrowedTime());
+        log.setBookReturnTime(this.bookShouldReturnBefore);
+        log.setBookBorrowStatus(0);
+        log.setFineStatus(0);
+        log.setPermitMoneyStatus(0);
+        return log;
     }
 }

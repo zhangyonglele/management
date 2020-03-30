@@ -4,6 +4,7 @@ import com.lib.management.mapper.BooksMapper;
 import com.lib.management.model.Books;
 import com.lib.management.service.BookService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -41,9 +42,8 @@ public class BookServiceImpl implements BookService {
     }
     //查找图书
     @Override
-    public Books queryBook(Integer bookId) {
-        Books book = booksMapper.selectByPrimaryKey(bookId);
-        return book;
+    public Books getBookByBookId(Integer bookId) {
+        return booksMapper.selectByPrimaryKey(bookId);
     }
 
     @Override
@@ -51,4 +51,24 @@ public class BookServiceImpl implements BookService {
         int i = booksMapper.updateByPrimaryKey(book);
         return i;
     }
+
+    @Override
+    public boolean bookBorrow(int readerId, int bookId) {
+        Books book = booksMapper.selectByPrimaryKey(bookId);
+        if(book == null){
+            return false;
+        }
+        //检查并刷新书籍可能存在的预约状态
+        book.checkAndRefreshPreOrderActive();
+        if(book.getBookBorrowStatus() > 0){
+            return false;
+        }
+        book.setBookBorrowStatus(1);
+        book.setBookBorrowBy(readerId);
+        book.initBookBorrowTime();
+        booksMapper.updateByPrimaryKeySelective(book);
+        return true;
+    }
+
+
 }

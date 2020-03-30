@@ -7,6 +7,9 @@ public interface BookService {
 
     boolean updateBookInfo(Books books);
 
-    Books queryBook(Integer bookId);
+    Books getBookByBookId(Integer bookId);
+
     Integer updateBook(Books book);
+
+    boolean bookBorrow(int readerId,int bookId);
 }

@@ -106,4 +106,8 @@
       largest_code = #{largestCode,jdbcType=INTEGER}
     where book_type_id = #{bookTypeId,jdbcType=INTEGER}
   </update>
+
+  <delete id="removeType" parameterType="java.lang.Integer">
+    delete from book_type where book_type_id = #{typeId,jdbcType=INTEGER}
+  </delete>
 </mapper>

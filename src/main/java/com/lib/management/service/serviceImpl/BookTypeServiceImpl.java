@@ -31,7 +31,19 @@ public class BookTypeServiceImpl implements BookTypeService {
     //暂不支持移除书籍分类
     @Override
     public boolean removeAOldType(int bookTypeId) {
-        return false;
+        int flag = 0;
+        try{
+            flag = bookTypeMapper.removeType(bookTypeId);
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return flag > 0;
+    }
+
+    @Override
+    public BookType getABookType(int bookTypeId) {
+        return bookTypeMapper.selectByPrimaryKey(bookTypeId);
     }
 
     @Override
