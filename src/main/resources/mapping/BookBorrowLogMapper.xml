@@ -23,6 +23,19 @@
     from book_borrow_log
     where log_id = #{logId,jdbcType=INTEGER}
   </select>
+  <select id="selectLogIdForCheckDataBaseError" resultType="java.lang.Integer">
+    select COUNT(*)
+    from book_borrow_log
+    WHERE book_borrow_status = 1
+       Or book_borrow_status = 3
+              and book_id = #{bookId,jdbcType=INTEGER}
+    GROUP BY book_id
+  </select>
+  <select id="selectByBookId" resultMap="BaseResultMap">
+    SELECT *
+    FROM `book_borrow_log`
+    where book_id = #{bookId,jdbcType=INTEGER} AND book_borrow_status = 1 OR book_borrow_status = 2
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from book_borrow_log
     where log_id = #{logId,jdbcType=INTEGER}

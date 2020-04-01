@@ -10,4 +10,8 @@ public interface BookBorrowLogService {
     Integer updateBookLog(BookBorrowLog bookBorrowLog);
 
     boolean borrowLog(Books book);
+
+    //boolean checkAndRefresh
+
+    boolean returnBookLog(int bookId);
 }

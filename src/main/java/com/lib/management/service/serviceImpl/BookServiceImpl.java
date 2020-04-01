@@ -19,7 +19,6 @@ public class BookServiceImpl implements BookService {
         Date currentDate = new Date();
         books.setLocationUpdateTime(currentDate);
         books.setBookBorrowStatus(0);
-        books.setBookBorrowStatus(0);
         books.setBookBorrowUpdateTime(currentDate);
         books.setBookActiveStatus(1);
         boolean flag = false;
