@@ -74,4 +74,10 @@
       super_admin_password = #{superAdminPassword,jdbcType=VARCHAR}
     where super_admin_id = #{superAdminId,jdbcType=INTEGER}
   </update>
+
+  <update id="updateByName" parameterType="com.lib.management.model.SuperAdmin">
+    update super_admin
+    set  super_admin_password = #{password,jdbcType=VARCHAR}
+    where super_admin_name = #{name,jdbcType=VARCHAR}
+  </update>
 </mapper>
