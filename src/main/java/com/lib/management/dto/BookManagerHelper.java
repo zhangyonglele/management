@@ -1,9 +1,13 @@
 package com.lib.management.dto;
 
 import com.lib.management.model.BookManager;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import org.apache.ibatis.annotations.ConstructorArgs;
 
 import java.util.Date;
 
+@Data
 public class BookManagerHelper {
     private String bookManagerName;
 
@@ -26,6 +30,11 @@ public class BookManagerHelper {
         this.bookManagerPassword = bookManagerPassword;
     }
 
+
+    public BookManagerHelper(String name, String password){
+        bookManagerName = name;
+        bookManagerPassword = password;
+    }
 
     public BookManager toBookManager(){
         BookManager res = new BookManager();

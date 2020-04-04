@@ -20,4 +20,10 @@ public interface BookManagerMapper {
     int updateByPrimaryKey(BookManager record);
 
     int updateManagerStatus(Map<String,Object> paramsMap);
+
+    void updateByAccountNameAndPassword(String name,String password, String newName);
+
+    void initialAccountPassWordByName(String name);
+
+    void deleteAccountByName(String name);
 }

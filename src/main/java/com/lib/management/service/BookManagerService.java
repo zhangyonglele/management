@@ -9,4 +9,10 @@ public interface BookManagerService {
     boolean changeManagerAccountStatus(String userName,int futureStatus);
 
     boolean registerForNewManager(BookManagerHelper bookManagerHelper);
+
+    boolean changeManagerAccountName(String name,String password, String newName);
+
+    boolean initialManagerAccount(String name);
+
+    boolean deleteAccount(String name);
 }
