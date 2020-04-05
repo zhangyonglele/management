@@ -1,8 +1,11 @@
 package com.lib.management.model;
 
+import lombok.AllArgsConstructor;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
+@AllArgsConstructor
 public class AdminConstData {
     private String constKey;
 
