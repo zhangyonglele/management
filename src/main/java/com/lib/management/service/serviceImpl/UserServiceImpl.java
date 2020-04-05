@@ -64,11 +64,34 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public User getUserInfoByUserId(int userId) {
+        return userMapper.selectByPrimaryKey(userId);
+    }
+
     //修改用户信息
     @Override
     public User alterPersonInfo(User user) {
         userMapper.updateByPrimaryKey(user);
         User user1 = userMapper.selectByPrimaryKey(user.getUserId());
         return user1;
+    }
+
+    @Override
+    public boolean deleteUserInfo(int userId) {
+        User user = userMapper.selectByPrimaryKey(userId);
+        user.setUserStatus(0);
+        boolean flag = false;
+        try {
+            int ret = userMapper.updateByPrimaryKey(user);
+            if(ret > 0){
+                flag = true;
+            }else {
+                flag = false;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return flag;
     }
 }

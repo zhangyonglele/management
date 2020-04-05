@@ -19,8 +19,7 @@ import java.util.Date;
  * 文件信息：
  */
 @RestController
-//@RunWith(SpringRunner.class)
-//@SpringBootTest(classes = ManagementApplication.class)
+@CrossOrigin(allowCredentials = "true",origins = {"http://localhost:8081","*"})
 public class BookBorrowLogController {
     @Resource
     private BookBorrowLogService bookBorrowLogService;

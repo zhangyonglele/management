@@ -15,7 +15,7 @@ public interface BookBorrowLogMapper {
 
     int updateByPrimaryKey(BookBorrowLog record);
 
-    int selectLogIdForCheckDataBaseError(int bookId);
+    Integer selectLogIdForCheckDataBaseError(int bookId);
 
     BookBorrowLog selectByBookId(int bookId);
 }

@@ -9,9 +9,16 @@ server:
     protocol-header: x-forwarded-proto
   use-forward-headers: true
 
+## 千万不能将该文件继续更新！不能commit！！！
+
+
 spring:
   profiles:
     active: dev
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 5MB
 
 mybatis:
   type-aliases-package: com/lib/management/model

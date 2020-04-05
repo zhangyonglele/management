@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lib.management.mapper.BookPositionDao">
+  <resultMap id="BaseResultMap" type="com.lib.management.dto.BookPosition">
+    <result column="book_id" jdbcType="INTEGER" property="bookId" />
+    <result column="book_info_id" jdbcType="INTEGER" property="bookInfoId" />
+    <result column="book_location_room" jdbcType="INTEGER" property="bookLocationRoom" />
+    <result column="book_location_sheet" jdbcType="INTEGER" property="bookLocationSheet" />
+    <result column="book_location_sheet_level" jdbcType="INTEGER" property="bookLocationSheetLevel" />
+    <result column="location_update_time" jdbcType="TIMESTAMP" property="locationUpdateTime" />
+    <result column="book_borrow_status" jdbcType="INTEGER" property="bookBorrowStatus" />
+    <result column="book_active_status" jdbcType="INTEGER" property="bookActiveStatus" />
+  </resultMap>
+  <select id="selectBookByBookInfoId" resultMap="BaseResultMap">
+    select *
+    from book_position
+    where book_info_id = #{bookInfoId,jdbcType=INTEGER}
+    limit #{pageNumber},10
+  </select>
+
+</mapper>

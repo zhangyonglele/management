@@ -72,6 +72,30 @@ public class BookManagerController {
         }
     }
 
+    @DeleteMapping("/librarian/reader/{ID}")
+    //@LoginRequire("librarian")
+    public UniversalResponseBody<Object> deleteReaderAccount(@PathVariable("ID")int readerId){
+        if(userService.deleteUserInfo(readerId)){
+            return new UniversalResponseBody<>(0,"success");
+        }else{
+            return new UniversalResponseBody<>(-1,"error");
+        }
+    }
+
+    @GetMapping("/librarian/reader/id/{id}")
+    @LoginRequire("librarian")
+    public UniversalResponseBody<User> findReaderByUserId(@PathVariable("id")int id){
+        return new UniversalResponseBody<>(0,"success",userService.getUserInfoByUserId(id));
+    }
+
+    @GetMapping("/librarian/reader/name/{name}")
+    @LoginRequire("librarian")
+    public UniversalResponseBody<User> findReaderByUserName(@PathVariable("name")String userName){
+        return new UniversalResponseBody<>(0,"success",userService.getUserInfoByName(userName));
+    }
+
+
+
     @PostMapping("/librarian/register")
     public UniversalResponseBody<Object> register(BookManagerHelper bookManagerHelper){
         if(bookManagerService.registerForNewManager(bookManagerHelper)){

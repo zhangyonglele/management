@@ -7,10 +7,7 @@ import com.lib.management.model.User;
 import com.lib.management.service.UserService;
 import com.lib.management.util.UniversalResponseBody;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -18,6 +15,7 @@ import java.util.Date;
 
 @RestController
 @Slf4j
+@CrossOrigin(allowCredentials = "true",origins = {"http://localhost:8081","*"})
 public class UserController {
     @Resource
     private UserService userService;

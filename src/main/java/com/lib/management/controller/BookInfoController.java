@@ -26,8 +26,6 @@ public class BookInfoController {
     @Resource
     private BookTypeService bookTypeService;
 
-    @Resource
-    private BookInfoResponseService bookInfoResponseService;
 
     @PostMapping("/book/info")
     @LoginRequire("librarian")
@@ -59,14 +57,14 @@ public class BookInfoController {
      * @return
      */
     //@GetMapping("/book/info/id/{id}")
-    public UniversalResponseBody getBookInfoById(@PathVariable("id") int bookId){
-        log.info("get func");
-        return new UniversalResponseBody<>(
-                0,
-                "success",
-                bookInfoResponseService.getBookInfoByBookInfoId(bookId)
-        );
-    }
+//    public UniversalResponseBody getBookInfoById(@PathVariable("id") int bookId){
+//        log.info("get func");
+//        return new UniversalResponseBody<>(
+//                0,
+//                "success",
+//                bookInfoResponseService.getBookInfoByBookInfoId(bookId)
+//        );
+//    }
 
 
     /**
@@ -76,14 +74,14 @@ public class BookInfoController {
      * @return
      */
     //@GetMapping("/books/info/name/{name}/page/{page}")
-    public UniversalResponseBody getBookInfoByName(@PathVariable("name")String bookName,
-                                                   @PathVariable("page")int page){
-        return new UniversalResponseBody<>(
-                0,
-                "success",
-                bookInfoResponseService.getBooksInfoByBookName(bookName,page)
-        );
-    }
+//    public UniversalResponseBody getBookInfoByName(@PathVariable("name")String bookName,
+//                                                   @PathVariable("page")int page){
+//        return new UniversalResponseBody<>(
+//                0,
+//                "success",
+//                bookInfoResponseService.getBooksInfoByBookName(bookName,page)
+//        );
+//    }
 
     @PutMapping("/book/info/{bookInfoId}")
     @LoginRequire("librarian")
@@ -118,27 +116,27 @@ public class BookInfoController {
      * @param page
      * @return
      */
-    //@GetMapping("/searchBy")
-    public UniversalResponseBody searchBy(@RequestParam(value = "bookName",required = false)String bookName,
-                                          @RequestParam(value = "bookTypeMark",required = false)String bookTypeMark,
-                                          @RequestParam(value = "bookAuthor",required = false) String bookAuthor,
-                                          @RequestParam(value = "bookPublisher",required = false)String bookPublisher,
-                                          @RequestParam(value = "page") int page){
-        Map<String,Object> multParams = new HashMap<>();
-        if(bookName != null){
-            multParams.put("bookName",bookName);
-        }
-        if(bookTypeMark != null){
-            multParams.put("bookTypeMark",bookTypeMark);
-        }
-        if(bookAuthor != null){
-            multParams.put("bookAuthor",bookAuthor);
-        }
-        if(bookPublisher != null){
-            multParams.put("bookPublisher",bookPublisher);
-        }
-        multParams.put("pageNumber",(page-1) * 17);
-        return new UniversalResponseBody<>(0,"success",bookInfoResponseService.searchByMultParams(multParams));
-    }
+//    //@GetMapping("/searchBy")
+//    public UniversalResponseBody searchBy(@RequestParam(value = "bookName",required = false)String bookName,
+//                                          @RequestParam(value = "bookTypeMark",required = false)String bookTypeMark,
+//                                          @RequestParam(value = "bookAuthor",required = false) String bookAuthor,
+//                                          @RequestParam(value = "bookPublisher",required = false)String bookPublisher,
+//                                          @RequestParam(value = "page") int page){
+//        Map<String,Object> multParams = new HashMap<>();
+//        if(bookName != null){
+//            multParams.put("bookName",bookName);
+//        }
+//        if(bookTypeMark != null){
+//            multParams.put("bookTypeMark",bookTypeMark);
+//        }
+//        if(bookAuthor != null){
+//            multParams.put("bookAuthor",bookAuthor);
+//        }
+//        if(bookPublisher != null){
+//            multParams.put("bookPublisher",bookPublisher);
+//        }
+//        multParams.put("pageNumber",(page-1) * 17);
+//        return new UniversalResponseBody<>(0,"success",bookInfoResponseService.searchByMultParams(multParams));
+//    }
 
 }

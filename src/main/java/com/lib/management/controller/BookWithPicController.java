@@ -37,7 +37,7 @@ public class BookWithPicController {
         params.put("bookTypeMarkList",bookTypeMark);
         params.put("bookAuthor",bookAuthor);
         params.put("bookPublisher",bookPublisher);
-        params.put("pageNumber",page-1);
+        params.put("pageNumber",(page-1)*17);
         return new UniversalResponseBody<>(0,"success",bookWithPicService.searchByMultiParams(params));
     }
 }

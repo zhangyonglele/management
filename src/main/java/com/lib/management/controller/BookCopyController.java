@@ -31,6 +31,11 @@ public class BookCopyController {
         }
     }
 
+    @GetMapping("/bookcopy/{bookInfoId}")
+    public UniversalResponseBody getBookCopyByBookInfoId(@PathVariable("bookInfoId") int bookInfoId){
+        return null;
+    }
+
     @PutMapping("/librarian/bookcopy")
     @LoginRequire("librarian")
     public UniversalResponseBody<Object> updateBookCopyLocationInfo(){

@@ -43,7 +43,12 @@ public class BookBorrowLogServiceImpl implements BookBorrowLogService {
     public boolean borrowLog(Books book) {
         BookBorrowLog log = book.toLog();
         //检查数据库错误
-        if(bookBorrowLogMapper.selectLogIdForCheckDataBaseError(book.getBookId()) > 0 ){
+        int errorPossible = 0;
+        if(bookBorrowLogMapper.selectLogIdForCheckDataBaseError(book.getBookId()) != null){
+            errorPossible = bookBorrowLogMapper.selectLogIdForCheckDataBaseError(book.getBookId());
+        }
+
+        if(errorPossible > 0 ){
             return false;
         }
         boolean flag = false;
