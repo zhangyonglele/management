@@ -1,10 +1,9 @@
 package com.lib.management.controller;
 
-import com.lib.management.dto.BookInfoHelper;
+import com.lib.management.dto.helper.BookInfoHelper;
 import com.lib.management.filter.annotation.LoginRequire;
 import com.lib.management.model.BookInfo;
 import com.lib.management.model.BookManager;
-import com.lib.management.service.BookInfoResponseService;
 import com.lib.management.service.BookInfoService;
 import com.lib.management.service.BookTypeService;
 import com.lib.management.util.UniversalResponseBody;
@@ -13,8 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @Slf4j

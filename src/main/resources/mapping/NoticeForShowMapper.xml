@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lib.management.mapper.NoticeForShowMapper">
+  <resultMap id="BaseResultMap" type="com.lib.management.dto.NoticeForShow">
+    <result column="broadcast_id" jdbcType="INTEGER" property="broadcastId" />
+    <result column="broadcast_title" jdbcType="VARCHAR" property="broadcastTitle" />
+    <result column="broadcast_contains" jdbcType="VARCHAR" property="broadcastContains" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="book_manager_name" jdbcType="VARCHAR" property="bookManagerName" />
+  </resultMap>
+<select id="selectNoticeDetailById" resultMap="BaseResultMap">
+  select
+  *
+  from
+  notice_for_show
+  where broadcast_id = #{broadcastId,jdbcType=INTEGER}
+</select>
+</mapper>

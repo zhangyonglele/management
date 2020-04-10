@@ -1,6 +1,6 @@
 package com.lib.management.service.serviceImpl;
 
-import com.lib.management.dto.BookManagerHelper;
+import com.lib.management.dto.helper.BookManagerHelper;
 import com.lib.management.mapper.BookManagerMapper;
 import com.lib.management.model.BookManager;
 import com.lib.management.service.BookManagerService;

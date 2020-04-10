@@ -1,6 +1,6 @@
 package com.lib.management.controller;
 
-import com.lib.management.dto.BookCopyHelper;
+import com.lib.management.dto.helper.BookCopyHelper;
 import com.lib.management.filter.annotation.LoginRequire;
 import com.lib.management.model.BookManager;
 import com.lib.management.model.Books;

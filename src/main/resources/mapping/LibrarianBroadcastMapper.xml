@@ -1,82 +1,100 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.lib.management.mapper.LibrarianBroadcastMapper" >
-  <resultMap id="BaseResultMap" type="com.lib.management.model.LibrarianBroadcast" >
-    <id column="broadcast_id" property="broadcastId" jdbcType="INTEGER" />
-    <result column="broadcast_contains" property="broadcastContains" jdbcType="VARCHAR" />
-    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lib.management.mapper.LibrarianBroadcastMapper">
+  <resultMap id="BaseResultMap" type="com.lib.management.model.LibrarianBroadcast">
+    <id column="broadcast_id" jdbcType="INTEGER" property="broadcastId" />
+    <result column="broadcast_title" jdbcType="VARCHAR" property="broadcastTitle" />
+    <result column="broadcast_contains" jdbcType="VARCHAR" property="broadcastContains" />
+    <result column="create_by" jdbcType="INTEGER" property="createBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
   </resultMap>
-  <sql id="Base_Column_List" >
-    broadcast_id, broadcast_contains, create_by, create_time
+  <sql id="Base_Column_List">
+    broadcast_id, broadcast_title, broadcast_contains, create_by, create_time, image
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from librarian_broadcast
     where broadcast_id = #{broadcastId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from librarian_broadcast
     where broadcast_id = #{broadcastId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.lib.management.model.LibrarianBroadcast" >
-    insert into librarian_broadcast (broadcast_id, broadcast_contains, create_by, 
-      create_time)
-    values (#{broadcastId,jdbcType=INTEGER}, #{broadcastContains,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP})
+  <insert id="insert" keyColumn="broadcast_id" keyProperty="broadcastId" parameterType="com.lib.management.model.LibrarianBroadcast" useGeneratedKeys="true">
+    insert into librarian_broadcast (broadcast_title, broadcast_contains, 
+      create_by, create_time, image
+      )
+    values (#{broadcastTitle,jdbcType=VARCHAR}, #{broadcastContains,jdbcType=VARCHAR}, 
+      #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{image,jdbcType=VARCHAR}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.lib.management.model.LibrarianBroadcast" >
+  <insert id="insertSelective" keyColumn="broadcast_id" keyProperty="broadcastId" parameterType="com.lib.management.model.LibrarianBroadcast" useGeneratedKeys="true">
     insert into librarian_broadcast
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="broadcastId != null" >
-        broadcast_id,
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="broadcastTitle != null">
+        broadcast_title,
       </if>
-      <if test="broadcastContains != null" >
+      <if test="broadcastContains != null">
         broadcast_contains,
       </if>
-      <if test="createBy != null" >
+      <if test="createBy != null">
         create_by,
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         create_time,
       </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="broadcastId != null" >
-        #{broadcastId,jdbcType=INTEGER},
+      <if test="image != null">
+        image,
       </if>
-      <if test="broadcastContains != null" >
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="broadcastTitle != null">
+        #{broadcastTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="broadcastContains != null">
         #{broadcastContains,jdbcType=VARCHAR},
       </if>
-      <if test="createBy != null" >
+      <if test="createBy != null">
         #{createBy,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lib.management.model.LibrarianBroadcast" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.lib.management.model.LibrarianBroadcast">
     update librarian_broadcast
-    <set >
-      <if test="broadcastContains != null" >
+    <set>
+      <if test="broadcastTitle != null">
+        broadcast_title = #{broadcastTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="broadcastContains != null">
         broadcast_contains = #{broadcastContains,jdbcType=VARCHAR},
       </if>
-      <if test="createBy != null" >
+      <if test="createBy != null">
         create_by = #{createBy,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
       </if>
     </set>
     where broadcast_id = #{broadcastId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lib.management.model.LibrarianBroadcast" >
+  <update id="updateByPrimaryKey" parameterType="com.lib.management.model.LibrarianBroadcast">
     update librarian_broadcast
-    set broadcast_contains = #{broadcastContains,jdbcType=VARCHAR},
+    set broadcast_title = #{broadcastTitle,jdbcType=VARCHAR},
+      broadcast_contains = #{broadcastContains,jdbcType=VARCHAR},
       create_by = #{createBy,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      image = #{image,jdbcType=VARCHAR}
     where broadcast_id = #{broadcastId,jdbcType=INTEGER}
   </update>
 </mapper>

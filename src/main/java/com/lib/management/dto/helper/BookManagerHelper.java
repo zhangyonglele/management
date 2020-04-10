@@ -1,4 +1,4 @@
-package com.lib.management.dto;
+package com.lib.management.dto.helper;
 
 import com.lib.management.model.BookManager;
 

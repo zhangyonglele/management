@@ -37,4 +37,12 @@ public class PictureServiceImpl implements PictureService {
         }
         return flag;
     }
+
+    public String uploadPicForBroadcast(MultipartFile file){
+        String fileUploadReturn = fileService.uploadFile2OSS(file);
+        if(fileUploadReturn.equals("error")) {
+            return "error";
+        }
+        return "https://img-buck.oss-cn-beijing.aliyuncs.com/project/img/" + fileUploadReturn;
+    }
 }

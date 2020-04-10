@@ -1,6 +1,6 @@
 package com.lib.management.controller;
 
-import com.lib.management.dto.BookManagerHelper;
+import com.lib.management.dto.helper.BookManagerHelper;
 import com.lib.management.filter.annotation.LoginRequire;
 import com.lib.management.model.BookManager;
 import com.lib.management.model.User;
@@ -73,7 +73,7 @@ public class BookManagerController {
     }
 
     @DeleteMapping("/librarian/reader/{ID}")
-    //@LoginRequire("librarian")
+    @LoginRequire("librarian")
     public UniversalResponseBody<Object> deleteReaderAccount(@PathVariable("ID")int readerId){
         if(userService.deleteUserInfo(readerId)){
             return new UniversalResponseBody<>(0,"success");

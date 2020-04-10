@@ -1,15 +1,12 @@
-package com.lib.management.model;
+package com.lib.management.dto;
+
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
 
-/**
- * librarian_broadcast
- * @author 
- */
 @Data
-public class LibrarianBroadcast implements Serializable {
+public class BroadcastTitleOnly implements Serializable {
     /**
      * 公告id
      */
@@ -21,16 +18,6 @@ public class LibrarianBroadcast implements Serializable {
     private String broadcastTitle;
 
     /**
-     * 公告内容
-     */
-    private String broadcastContains;
-
-    /**
-     * 公告创建人
-     */
-    private Integer createBy;
-
-    /**
      * 创建时间
      */
     private Date createTime;
@@ -39,5 +26,4 @@ public class LibrarianBroadcast implements Serializable {
      * 公告封面
      */
     private String image;
-
 }

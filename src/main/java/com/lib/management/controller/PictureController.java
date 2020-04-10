@@ -3,10 +3,7 @@ package com.lib.management.controller;
 import com.lib.management.filter.annotation.LoginRequire;
 import com.lib.management.service.PictureService;
 import com.lib.management.util.UniversalResponseBody;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -27,5 +24,14 @@ public class PictureController {
         }
     }
 
-
+    @GetMapping("/broadcast/picture")
+    @LoginRequire("librarian")
+    public UniversalResponseBody getImageURL(@RequestParam("file") MultipartFile file){
+        String ret = pictureService.uploadPicForBroadcast(file);
+        if(ret.equals("error")){
+            return new UniversalResponseBody(-1,"error");
+        }else{
+            return new UniversalResponseBody(0,"success",ret);
+        }
+    }
 }
