@@ -202,6 +202,7 @@ public class Books {
         log.setBookId(this.getBookId());
         log.setBookBorrowTime(this.getBookBorrowedTime());
         log.setBookReturnTime(this.bookShouldReturnBefore);
+        //设置为在借状态
         log.setBookBorrowStatus(0);
         log.setFineStatus(0);
         log.setPermitMoneyStatus(0);

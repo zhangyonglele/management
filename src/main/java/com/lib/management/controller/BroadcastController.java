@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
+@CrossOrigin(allowCredentials = "true",origins = {"http://localhost:8081","*"})
 public class BroadcastController {
     @Resource
     private NoticeService noticeService;

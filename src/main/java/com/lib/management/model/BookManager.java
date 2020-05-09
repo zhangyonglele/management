@@ -1,5 +1,7 @@
 package com.lib.management.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -12,6 +14,7 @@ public class BookManager implements Serializable {
 
     private Integer createBy;
 
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     private Integer activeStatus;

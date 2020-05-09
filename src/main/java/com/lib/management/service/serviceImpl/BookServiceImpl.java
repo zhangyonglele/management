@@ -70,4 +70,38 @@ public class BookServiceImpl implements BookService {
     }
 
 
+    @Override
+    public boolean makeBookWaitingForResetPosition(int bookId) {
+        Books book = booksMapper.selectByPrimaryKey(bookId);
+        if(book == null){
+            return false;
+        }
+        //设置书本为待复位阶段
+        book.setBookBorrowStatus(3);
+        boolean flag = false;
+        try{
+            booksMapper.updateByPrimaryKey(book);
+            flag = true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
+    @Override
+    public boolean setBookReturn(int bookId,int room,int sheet,int layer) {
+        Books book = booksMapper.selectByPrimaryKey(bookId);
+        book.setBookLocationRoom(room);
+        book.setBookLocationSheet(sheet);
+        book.setBookLocationSheetLevel(layer);
+        book.setLocationUpdateTime(new Date());
+        boolean flag = false;
+        try{
+            booksMapper.updateByPrimaryKey(book);
+            flag = true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return flag;
+    }
 }

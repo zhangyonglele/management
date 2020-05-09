@@ -44,10 +44,11 @@ public class BookBorrowLogServiceImpl implements BookBorrowLogService {
         BookBorrowLog log = book.toLog();
         //检查数据库错误
         int errorPossible = 0;
+        //如果日志中日志中一本书已经有活跃状态，则设置错误值
         if(bookBorrowLogMapper.selectLogIdForCheckDataBaseError(book.getBookId()) != null){
             errorPossible = bookBorrowLogMapper.selectLogIdForCheckDataBaseError(book.getBookId());
         }
-
+        //若不是默认错误值，则无法借阅
         if(errorPossible > 0 ){
             return false;
         }
@@ -66,15 +67,21 @@ public class BookBorrowLogServiceImpl implements BookBorrowLogService {
     @Override
     public boolean returnBookLog(int bookId) {
         BookBorrowLog log = bookBorrowLogMapper.selectByBookId(bookId);
+        //从数据库获取数据常量，获取保证金数额
+        if(log == null){
+            return  false;
+        }
         float permitNumber = adminConstDataMapper.selectByPrimaryKey("permit_number")
                 .getConstValue()
                 .floatValue();
         log.setPermitMoneyNumber(BigDecimal.valueOf(permitNumber));
         Date now = new Date();
+        //设置保证金状态
         log.setPermitMoneyStatus(1);
         //超期处理
         if(log.getBookReturnTime().before(now)){
             long day=(now.getTime()-log.getBookReturnTime().getTime())/(24*60*60*1000);
+            //获取罚金常量
             float fineNumber = adminConstDataMapper.selectByPrimaryKey("fine_number")
                     .getConstValue()
                     .floatValue();
@@ -82,7 +89,9 @@ public class BookBorrowLogServiceImpl implements BookBorrowLogService {
             log.setBookBorrowStatus(3);
             log.setFineStatus(1);
         }else{
+            //非超期则返回非超期操作/设置日志为已归还状态
             log.setBookBorrowStatus(1);
+            //设置罚金为无
             log.setFineNumber(BigDecimal.valueOf(0));
             log.setFineStatus(0);
         }

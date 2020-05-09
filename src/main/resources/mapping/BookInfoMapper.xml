@@ -25,7 +25,7 @@
   </select>
 
   <select id="getLastInsertId" resultType="java.lang.Integer">
-    select last_insert_id() from book_info
+    select last_insert_id()
   </select>
 
   <select id="selectByBookName" resultMap="BaseResultMap" parameterType="java.lang.String">
