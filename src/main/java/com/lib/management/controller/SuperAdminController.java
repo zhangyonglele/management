@@ -54,11 +54,8 @@ public class SuperAdminController {
         }
         SuperAdmin superAdmin = superAdminService.searchAccountByAdminName(name);
         if(superAdmin != null && superAdmin.getSuperAdminPassword().equals(oldPwd)){
-            if(superAdminService.updateAccountByAdminName(name,newPwd))
-                return new UniversalResponseBody(0,"success");
-            else {
-                return new UniversalResponseBody(-1,"error");
-            }
+            superAdminService.updateAccountByAdminName(name,newPwd);
+            return new UniversalResponseBody(0,"success");
         }else {
             log.warn("[WARRING CHECK] userName "+name+",password " +oldPwd);
             return new UniversalResponseBody(-1,"error");
