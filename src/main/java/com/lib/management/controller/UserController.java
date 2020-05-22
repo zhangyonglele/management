@@ -75,4 +75,15 @@ public class UserController {
         else
             return new UniversalResponseBody(-1,"error");
     }
+
+    @GetMapping("/reader/fine")
+    @LoginRequire("reader")
+    public UniversalResponseBody getUserFine(HttpSession session){
+        User user = (User)session.getAttribute("userInfo");
+        if(user!=null){
+            Double fine = userService.getUserFine(user);
+            return new UniversalResponseBody(0,"success",fine);
+        }
+        return new UniversalResponseBody(-1,"error");
+    }
 }

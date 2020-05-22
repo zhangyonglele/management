@@ -2,6 +2,7 @@ package com.lib.management.service.serviceImpl;
 
 import com.lib.management.dto.UserHelper;
 import com.lib.management.dto.UserInfoHelper;
+import com.lib.management.mapper.BookBorrowLogMapper;
 import com.lib.management.mapper.UserMapper;
 import com.lib.management.model.User;
 import com.lib.management.service.UserService;
@@ -15,6 +16,9 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Resource
     private UserMapper userMapper;
+
+    @Resource
+    private BookBorrowLogMapper bookBorrowLogMapper;
 
     @Override
     public boolean addNewUser(User user) {
@@ -70,5 +74,10 @@ public class UserServiceImpl implements UserService {
         userMapper.updateByPrimaryKey(user);
         User user1 = userMapper.selectByPrimaryKey(user.getUserId());
         return user1;
+    }
+
+    @Override
+    public Double getUserFine(User user) {
+        return bookBorrowLogMapper.getUserFine(user);
     }
 }
