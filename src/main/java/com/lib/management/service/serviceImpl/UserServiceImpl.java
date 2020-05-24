@@ -3,6 +3,7 @@ package com.lib.management.service.serviceImpl;
 import com.lib.management.dto.UserHelper;
 import com.lib.management.dto.UserInfoHelper;
 import com.lib.management.mapper.BookBorrowLogMapper;
+import com.lib.management.mapper.FavoriteBookMapper;
 import com.lib.management.mapper.UserMapper;
 import com.lib.management.model.User;
 import com.lib.management.service.UserService;
@@ -19,6 +20,9 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     private BookBorrowLogMapper bookBorrowLogMapper;
+
+    @Resource
+    private FavoriteBookMapper favoriteBookMapper;
 
     @Override
     public boolean addNewUser(User user) {
@@ -79,5 +83,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public Double getUserFine(User user) {
         return bookBorrowLogMapper.getUserFine(user);
+    }
+
+    @Override
+    public List<String> getUserFavoriteBook(String userId) {
+        return favoriteBookMapper.getUserFavoriteBook(userId);
     }
 }

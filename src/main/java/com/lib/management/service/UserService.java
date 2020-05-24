@@ -20,4 +20,6 @@ public interface UserService {
     User alterPersonInfo(User user);
 
     Double getUserFine(User user);
+
+    List<String> getUserFavoriteBook(String userId);
 }
