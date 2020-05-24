@@ -5,6 +5,7 @@ import com.lib.management.dto.UserInfoHelper;
 import com.lib.management.mapper.BookBorrowLogMapper;
 import com.lib.management.mapper.FavoriteBookMapper;
 import com.lib.management.mapper.UserMapper;
+import com.lib.management.model.FavoriteBook;
 import com.lib.management.model.User;
 import com.lib.management.service.UserService;
 import org.springframework.stereotype.Service;
@@ -88,5 +89,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<String> getUserFavoriteBook(String userId) {
         return favoriteBookMapper.getUserFavoriteBook(userId);
+    }
+
+    @Override
+    public boolean addFavoriteBook(User user, Integer bookInfoId) {
+        FavoriteBook record = new FavoriteBook();
+        record.setBookInfoId(bookInfoId);
+        record.setUserId(user.getUserId());
+
+        try{
+            if(favoriteBookMapper.insert(record)==1)
+                return true;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return false;
     }
 }

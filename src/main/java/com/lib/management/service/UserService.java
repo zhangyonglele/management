@@ -22,4 +22,6 @@ public interface UserService {
     Double getUserFine(User user);
 
     List<String> getUserFavoriteBook(String userId);
+
+    boolean addFavoriteBook(User user, Integer bookInfoId);
 }

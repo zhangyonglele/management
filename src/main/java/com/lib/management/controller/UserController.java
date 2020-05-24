@@ -96,4 +96,15 @@ public class UserController {
         else
             return new UniversalResponseBody(-1,"error");
     }
+
+    @PostMapping("/reader/addFavorite")
+    @LoginRequire("reader")
+    public UniversalResponseBody addFavoriteBook(HttpSession session, Integer bookId){
+        User user = (User)session.getAttribute("userInfo");
+
+        if(user!=null&&userService.addFavoriteBook(user,bookId)){
+            return new UniversalResponseBody(0,"success");
+        }
+        return new UniversalResponseBody(-1,"error");
+    }
 }
