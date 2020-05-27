@@ -54,8 +54,9 @@ public class BookManagerServiceImpl implements BookManagerService {
     public boolean changeManagerAccountName(String name,String password, String newName) {
         boolean flag = false;
         try {
-            bookManagerMapper.updateByAccountNameAndPassword(name,password,newName);
-            flag = true;
+            if(bookManagerMapper.updateByAccountNameAndPassword(name,password,newName) > 0){
+                flag = true;
+            }
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -66,8 +67,8 @@ public class BookManagerServiceImpl implements BookManagerService {
     public boolean initialManagerAccount(String name) {
         boolean flag = false;
         try {
-            bookManagerMapper.initialAccountPassWordByName(name);
-            flag = true;
+            if(bookManagerMapper.initialAccountPassWordByName(name) > 0)
+                flag = true;
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -78,8 +79,8 @@ public class BookManagerServiceImpl implements BookManagerService {
     public boolean deleteAccount(String name) {
         boolean flag = false;
         try {
-            bookManagerMapper.deleteAccountByName(name);
-            flag = true;
+            if(bookManagerMapper.deleteAccountByName(name) > 0)
+                flag = true;
         }catch (Exception e){
             e.printStackTrace();
         }

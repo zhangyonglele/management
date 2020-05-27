@@ -6,6 +6,7 @@ import com.lib.management.service.SuperAdminService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.security.cert.TrustAnchor;
 
 @Service
 public class SuperAdminServiceImpl implements SuperAdminService {
@@ -22,7 +23,14 @@ public class SuperAdminServiceImpl implements SuperAdminService {
     }
 
     @Override
-    public void updateAccountByAdminName(String name, String password) {
-        superAdminMapper.updateByName(name,password);
+    public boolean updateAccountByAdminName(String name, String password) {
+        boolean flag = false;
+        try {
+            superAdminMapper.updateByName(name,password);
+            flag = true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return flag;
     }
 }

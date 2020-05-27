@@ -44,6 +44,7 @@ public class SuperAdminController {
         return new UniversalResponseBody(0,"success");
     }
 
+    //修改超管密码
     @PutMapping("/password")
     @LoginRequire("superAdmin")
     public UniversalResponseBody updatePassword(String name,String oldPwd, String newPwd, String newPwdRep,
@@ -67,7 +68,7 @@ public class SuperAdminController {
 
     //修改管理员账号名称
     @PutMapping("/bookmanager")
-    //@LoginRequire("superAdmin")
+    @LoginRequire("superAdmin")
     public UniversalResponseBody updateName(String name,String password,String nameRep,HttpSession session){
         if(name.equals(nameRep)){
             log.warn("[WARRING CHECK] name"+name+" newName"+nameRep);
@@ -98,17 +99,19 @@ public class SuperAdminController {
 
     }
 
+
     //初始化管理员账号密码
     @PutMapping("/bookmanager/password")
     @LoginRequire("superAdmin")
     public UniversalResponseBody initialManagerPassword(String name){
         if(bookManagerService.initialManagerAccount(name)){
-            return new UniversalResponseBody(0,"success");
+            return new UniversalResponseBody(0,"success","123456");
         }else {
             log.info("[WARN CHECK "+name);
             return new UniversalResponseBody(-1,"error");
         }
     }
+
 
     //删除管理员账号
     @DeleteMapping("/bookmanager")
