@@ -7,17 +7,16 @@ import com.lib.management.model.User;
 import com.lib.management.service.UserService;
 import com.lib.management.util.UniversalResponseBody;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @Slf4j
+@CrossOrigin(allowCredentials = "true",origins = {"http://localhost:8081","*"})
 public class UserController {
     @Resource
     private UserService userService;
@@ -76,5 +75,36 @@ public class UserController {
             return new UniversalResponseBody(0,"success");
         else
             return new UniversalResponseBody(-1,"error");
+    }
+
+    @GetMapping("/reader/fine")
+    @LoginRequire("reader")
+    public UniversalResponseBody getUserFine(HttpSession session){
+        User user = (User)session.getAttribute("userInfo");
+        if(user!=null){
+            Double fine = userService.getUserFine(user);
+            return new UniversalResponseBody(0,"success",fine);
+        }
+        return new UniversalResponseBody(-1,"error");
+    }
+
+    @GetMapping("/reader/favorite")
+    public UniversalResponseBody getUserFavoriteBook(String userId){
+        List<String> bookIdList = userService.getUserFavoriteBook(userId);
+        if(bookIdList!=null)
+            return new UniversalResponseBody(0,"success",bookIdList);
+        else
+            return new UniversalResponseBody(-1,"error");
+    }
+
+    @PostMapping("/reader/addFavorite")
+    @LoginRequire("reader")
+    public UniversalResponseBody addFavoriteBook(HttpSession session, Integer bookId){
+        User user = (User)session.getAttribute("userInfo");
+
+        if(user!=null&&userService.addFavoriteBook(user,bookId)){
+            return new UniversalResponseBody(0,"success");
+        }
+        return new UniversalResponseBody(-1,"error");
     }
 }
