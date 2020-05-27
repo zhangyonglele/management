@@ -83,6 +83,8 @@ public class UserController {
         User user = (User)session.getAttribute("userInfo");
         if(user!=null){
             Double fine = userService.getUserFine(user);
+            if(fine==null)
+                fine = 0.0;
             return new UniversalResponseBody(0,"success",fine);
         }
         return new UniversalResponseBody(-1,"error");
@@ -99,10 +101,10 @@ public class UserController {
 
     @PostMapping("/reader/addFavorite")
     @LoginRequire("reader")
-    public UniversalResponseBody addFavoriteBook(HttpSession session, Integer bookId){
+    public UniversalResponseBody addFavoriteBook(HttpSession session, Integer bookInfoId){
         User user = (User)session.getAttribute("userInfo");
 
-        if(user!=null&&userService.addFavoriteBook(user,bookId)){
+        if(user!=null&&userService.addFavoriteBook(user,bookInfoId)){
             return new UniversalResponseBody(0,"success");
         }
         return new UniversalResponseBody(-1,"error");

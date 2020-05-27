@@ -166,15 +166,14 @@
   <select id="getUserFine" resultType="java.lang.Double" parameterType="com.lib.management.model.User" >
     select sum(datediff(NOW(),book_borrow_time)*(select const_value
                                             from admin_const_data
-                                            where const_key='fineRate'))
+                                            where const_key='fine_number'))
     from book_borrow_log
     where book_borrow_by = #{userId,jdbcType=INTEGER}
       and book_borrow_status=0
       and fine_status=0
       and datediff(NOW(),book_borrow_time)>(select const_value
                                     from admin_const_data
-                                    where const_key='returnPeriod')
+                                    where const_key='borrow_days')
   </select>
-  <!-- 设置了fineRate和returnPeriod常量 -->
   <!-- fine_status 0表示未缴纳 -->
 </mapper>

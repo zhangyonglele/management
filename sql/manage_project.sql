@@ -1,6 +1,7 @@
 -- admin const value
-insert into admin_const_data values ('fineRate',1.0,1,now());
-insert into admin_const_data values ('returnPeriod',30,1,now());
+insert into admin_const_data values ('borrow_days',30,1,now());
+insert into admin_const_data values ('fine_number',30,1,now());
+insert into admin_const_data values ('permit_number',15,1,now());
 
 create table favorite_book(
     `user_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户唯一标识符',
