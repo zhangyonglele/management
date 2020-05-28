@@ -4,16 +4,14 @@ import com.lib.management.filter.annotation.LoginRequire;
 import com.lib.management.service.AdminConstDataService;
 import com.lib.management.util.UniversalResponseBody;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 
 @Slf4j
+@CrossOrigin(allowCredentials = "true",origins = {"http://localhost:8081","*"})
 @RequestMapping("/admin/rules")
 @RestController
 public class AdminConstDataController {

@@ -16,6 +16,7 @@ import java.util.Date;
 
 @Slf4j
 @RestController
+@CrossOrigin(allowCredentials = "true",origins = {"http://localhost:8081","*"})
 @RequestMapping("/admin")
 public class SuperAdminController {
     @Resource
