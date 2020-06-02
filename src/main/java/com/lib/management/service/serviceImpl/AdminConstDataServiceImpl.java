@@ -16,15 +16,15 @@ public class AdminConstDataServiceImpl implements AdminConstDataService {
     AdminConstDataMapper adminConstDataMapper;
 
     @Override
-    public boolean updateAdminConstData(String constKey, BigDecimal num) {
+    public boolean updateAdminConstData(String constKey, BigDecimal constValue) {
         /*String dateS = MyDateFormat.dateFormat.format(new Date());
-        *//*Date date = null;
+        Date date = null;
         try {
             date = MyDateFormat.dateFormat.parse(dateS);
         }catch (Exception e){
             e.printStackTrace();
-        }*//*
-        AdminConstData adminConstData = new AdminConstData(constKey,num,1,null);*/
-        return adminConstDataMapper.updateByPrimaryKey(constKey,num) > 0;
+        }
+//        AdminConstData adminConstData = new AdminConstData(constKey,num,1,null);*/
+        return adminConstDataMapper.updateByPrimaryKey(constKey,constValue) > 0;
     }
 }

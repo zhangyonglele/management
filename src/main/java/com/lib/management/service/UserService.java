@@ -21,5 +21,11 @@ public interface UserService {
     //修改用户个人信息
     User alterPersonInfo(User user);
 
+    Double getUserFine(User user);
+
+    List<String> getUserFavoriteBook(String userId);
+
+    boolean addFavoriteBook(User user, Integer bookInfoId);
+
     boolean  deleteUserInfo(int userId);
 }

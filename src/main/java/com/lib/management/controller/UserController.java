@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -74,5 +75,38 @@ public class UserController {
             return new UniversalResponseBody(0,"success");
         else
             return new UniversalResponseBody(-1,"error");
+    }
+
+    @GetMapping("/reader/fine")
+    @LoginRequire("reader")
+    public UniversalResponseBody getUserFine(HttpSession session){
+        User user = (User)session.getAttribute("userInfo");
+        if(user!=null){
+            Double fine = userService.getUserFine(user);
+            if(fine==null)
+                fine = 0.0;
+            return new UniversalResponseBody(0,"success",fine);
+        }
+        return new UniversalResponseBody(-1,"error");
+    }
+
+    @GetMapping("/reader/favorite")
+    public UniversalResponseBody getUserFavoriteBook(String userId){
+        List<String> bookIdList = userService.getUserFavoriteBook(userId);
+        if(bookIdList!=null)
+            return new UniversalResponseBody(0,"success",bookIdList);
+        else
+            return new UniversalResponseBody(-1,"error");
+    }
+
+    @PostMapping("/reader/addFavorite")
+    @LoginRequire("reader")
+    public UniversalResponseBody addFavoriteBook(HttpSession session, Integer bookInfoId){
+        User user = (User)session.getAttribute("userInfo");
+
+        if(user!=null&&userService.addFavoriteBook(user,bookInfoId)){
+            return new UniversalResponseBody(0,"success");
+        }
+        return new UniversalResponseBody(-1,"error");
     }
 }

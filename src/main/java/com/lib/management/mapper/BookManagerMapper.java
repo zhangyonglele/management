@@ -21,9 +21,9 @@ public interface BookManagerMapper {
 
     int updateManagerStatus(Map<String,Object> paramsMap);
 
-    void updateByAccountNameAndPassword(String name,String password, String newName);
+    int updateByAccountNameAndPassword(String name,String password, String newName);
 
-    void initialAccountPassWordByName(String name);
+    int initialAccountPassWordByName(String name);
 
-    void deleteAccountByName(String name);
+    int deleteAccountByName(String name);
 }

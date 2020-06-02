@@ -16,6 +16,7 @@ import java.util.Date;
 
 @Slf4j
 @RestController
+@CrossOrigin(allowCredentials = "true",origins = {"http://localhost:8081","*"})
 @RequestMapping("/admin")
 public class SuperAdminController {
     @Resource
@@ -44,6 +45,7 @@ public class SuperAdminController {
         return new UniversalResponseBody(0,"success");
     }
 
+    //修改超管密码
     @PutMapping("/password")
     @LoginRequire("superAdmin")
     public UniversalResponseBody updatePassword(String name,String oldPwd, String newPwd, String newPwdRep,
@@ -54,11 +56,8 @@ public class SuperAdminController {
         }
         SuperAdmin superAdmin = superAdminService.searchAccountByAdminName(name);
         if(superAdmin != null && superAdmin.getSuperAdminPassword().equals(oldPwd)){
-            if(superAdminService.updateAccountByAdminName(name,newPwd))
-                return new UniversalResponseBody(0,"success");
-            else {
-                return new UniversalResponseBody(-1,"error");
-            }
+            superAdminService.updateAccountByAdminName(name,newPwd);
+            return new UniversalResponseBody(0,"success");
         }else {
             log.warn("[WARRING CHECK] userName "+name+",password " +oldPwd);
             return new UniversalResponseBody(-1,"error");
@@ -67,7 +66,7 @@ public class SuperAdminController {
 
     //修改管理员账号名称
     @PutMapping("/bookmanager")
-    //@LoginRequire("superAdmin")
+    @LoginRequire("superAdmin")
     public UniversalResponseBody updateName(String name,String password,String nameRep,HttpSession session){
         if(name.equals(nameRep)){
             log.warn("[WARRING CHECK] name"+name+" newName"+nameRep);
@@ -98,17 +97,19 @@ public class SuperAdminController {
 
     }
 
+
     //初始化管理员账号密码
     @PutMapping("/bookmanager/password")
     @LoginRequire("superAdmin")
     public UniversalResponseBody initialManagerPassword(String name){
         if(bookManagerService.initialManagerAccount(name)){
-            return new UniversalResponseBody(0,"success");
+            return new UniversalResponseBody(0,"success","123456");
         }else {
             log.info("[WARN CHECK "+name);
             return new UniversalResponseBody(-1,"error");
         }
     }
+
 
     //删除管理员账号
     @DeleteMapping("/bookmanager")

@@ -2,7 +2,10 @@ package com.lib.management.service.serviceImpl;
 
 import com.lib.management.dto.UserHelper;
 import com.lib.management.dto.UserInfoHelper;
+import com.lib.management.mapper.BookBorrowLogMapper;
+import com.lib.management.mapper.FavoriteBookMapper;
 import com.lib.management.mapper.UserMapper;
+import com.lib.management.model.FavoriteBook;
 import com.lib.management.model.User;
 import com.lib.management.service.UserService;
 import org.springframework.stereotype.Service;
@@ -15,6 +18,12 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Resource
     private UserMapper userMapper;
+
+    @Resource
+    private BookBorrowLogMapper bookBorrowLogMapper;
+
+    @Resource
+    private FavoriteBookMapper favoriteBookMapper;
 
     @Override
     public boolean addNewUser(User user) {
@@ -93,5 +102,31 @@ public class UserServiceImpl implements UserService {
             e.printStackTrace();
         }
         return flag;
+    }
+
+    @Override
+    public Double getUserFine(User user) {
+        return bookBorrowLogMapper.getUserFine(user);
+    }
+
+    @Override
+    public List<String> getUserFavoriteBook(String userId) {
+        return favoriteBookMapper.getUserFavoriteBook(userId);
+    }
+
+    @Override
+    public boolean addFavoriteBook(User user, Integer bookInfoId) {
+        FavoriteBook record = new FavoriteBook();
+        record.setBookInfoId(bookInfoId);
+        record.setUserId(user.getUserId());
+
+        try{
+            if(favoriteBookMapper.insert(record)==1)
+                return true;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return false;
     }
 }
