@@ -3,7 +3,7 @@ package com.lib.management.dto;
 import lombok.Data;
 
 /**
- * 部分淘汰，新功能请使用BookWithPic开发
+ * this class is obsolete, please use BookWithPic to dev new Function
  */
 @Data
 public class BookInfoResponse {

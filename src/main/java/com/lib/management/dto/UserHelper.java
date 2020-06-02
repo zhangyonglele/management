@@ -3,6 +3,9 @@ package com.lib.management.dto;
 import com.lib.management.model.User;
 import lombok.Data;
 
+/**
+ * a view in database
+ */
 @Data
 public class UserHelper {
     private Integer userId;

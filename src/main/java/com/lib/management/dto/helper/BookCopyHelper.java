@@ -3,6 +3,9 @@ package com.lib.management.dto.helper;
 import com.lib.management.model.Books;
 import lombok.Data;
 
+/**
+ * This class use for Help Controller input
+ */
 @Data
 public class BookCopyHelper {
     private Integer bookInfoId;

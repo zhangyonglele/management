@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
             return false;
         }else{
             uninitReader.setCreateBy(initBy);
-            uninitReader.setUserStatus(1);
+            uninitReader.setUserStatus(300);
             if(userMapper.updateByPrimaryKeySelective(uninitReader) > 0){
                 return true;
             }else{

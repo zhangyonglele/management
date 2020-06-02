@@ -4,7 +4,7 @@ import java.io.Serializable;
 import lombok.Data;
 
 /**
- * book_with_pic
+ * book_with_pic a view in database
  * @author 
  */
 @Data

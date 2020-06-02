@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lib.management.mapper.ControlLogForShowMapper">
+  <resultMap id="BaseResultMap" type="com.lib.management.dto.ControlLogForShow">
+    <result column="log_id" jdbcType="INTEGER" property="logId" />
+    <result column="book_manager_name" jdbcType="VARCHAR" property="bookManagerName" />
+    <result column="log_type" jdbcType="INTEGER" property="logType" />
+    <result column="option_contain" jdbcType="VARCHAR" property="optionContain" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <select id="selectLogByPage" resultMap="BaseResultMap">
+    select *
+    from control_log_for_show
+    limit #{page},10
+  </select>
+</mapper>

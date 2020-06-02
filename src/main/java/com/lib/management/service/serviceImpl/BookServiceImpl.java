@@ -3,6 +3,7 @@ package com.lib.management.service.serviceImpl;
 import com.lib.management.mapper.BooksMapper;
 import com.lib.management.model.Books;
 import com.lib.management.service.BookService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,6 +11,7 @@ import javax.annotation.Resource;
 import java.util.Date;
 
 @Service
+@Slf4j
 public class BookServiceImpl implements BookService {
     @Resource
     private BooksMapper booksMapper;
@@ -66,6 +68,7 @@ public class BookServiceImpl implements BookService {
         book.setBookBorrowBy(readerId);
         book.initBookBorrowTime();
         booksMapper.updateByPrimaryKeySelective(book);
+
         return true;
     }
 
@@ -94,6 +97,7 @@ public class BookServiceImpl implements BookService {
         book.setBookLocationRoom(room);
         book.setBookLocationSheet(sheet);
         book.setBookLocationSheetLevel(layer);
+        book.setBookBorrowStatus(0);
         book.setLocationUpdateTime(new Date());
         boolean flag = false;
         try{

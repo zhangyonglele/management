@@ -127,4 +127,12 @@
       permit_status = #{permitStatus,jdbcType=INTEGER}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
+
+  <select id="selectUserRegisterByDate" resultMap="BaseResultMap">
+    select *
+    from user
+    where unix_timestamp(create_time)
+        between unix_timestamp(#{begin}) and unix_timestamp(#{end})
+    limit #{page},10
+  </select>
 </mapper>

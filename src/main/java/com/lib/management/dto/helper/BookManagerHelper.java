@@ -3,7 +3,9 @@ package com.lib.management.dto.helper;
 import com.lib.management.model.BookManager;
 
 import java.util.Date;
-
+/**
+ * This class use for Help Controller input
+ */
 public class BookManagerHelper {
     private String bookManagerName;
 

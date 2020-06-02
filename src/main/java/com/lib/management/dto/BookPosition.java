@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * book_position
+ * book_position a view in database
  * @author 
  */
 public class BookPosition implements Serializable {

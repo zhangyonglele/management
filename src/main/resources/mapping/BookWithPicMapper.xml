@@ -33,7 +33,7 @@
     from book_with_pic
     <where>
       <if test="bookName != null">
-        book_name = #{bookName,jdbcType=VARCHAR}
+        book_name like CONCAT(CONCAT('%', #{bookName,jdbcType=VARCHAR}), '%')
       </if>
       <if test="bookTypeMarkList != null">
         And book_type_mark in

@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 /**
- * notice_for_show
+ * notice_for_show a view in database
  * @author 
  */
 @Data

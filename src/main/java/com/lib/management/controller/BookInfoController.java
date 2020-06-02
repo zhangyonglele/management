@@ -1,10 +1,13 @@
 package com.lib.management.controller;
 
 import com.lib.management.dto.helper.BookInfoHelper;
+import com.lib.management.factory.BookControlLogFactory;
 import com.lib.management.filter.annotation.LoginRequire;
+import com.lib.management.model.BookControlLog;
 import com.lib.management.model.BookInfo;
 import com.lib.management.model.BookManager;
 import com.lib.management.service.BookInfoService;
+import com.lib.management.service.BookLogService;
 import com.lib.management.service.BookTypeService;
 import com.lib.management.util.UniversalResponseBody;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +25,9 @@ public class BookInfoController {
 
     @Resource
     private BookTypeService bookTypeService;
+
+    @Resource
+    private BookLogService bookLogService;
 
 
     @PostMapping("/book/info")
@@ -41,6 +47,11 @@ public class BookInfoController {
         );
         int insertId = bookInfoService.addNewBookInfo(bookInfo);
         if(insertId > 0){
+            {
+                BookControlLog log = BookControlLogFactory.getAddingNewBookInfoLog(bookInfo.getBookName());
+                log.setUpdateBy(bookManager.getBookManagerId());
+                bookLogService.addLog(log);
+            }
             return new UniversalResponseBody(0,"success",insertId);
         }else {
             return new UniversalResponseBody(-1,"error");
@@ -98,6 +109,10 @@ public class BookInfoController {
     public UniversalResponseBody removeBookInfoById(@PathVariable("id") int bookId){
 
         if(bookInfoService.updateABookInfoStatus(bookId,0)){
+            {
+                BookControlLog log = BookControlLogFactory.getDeleteBookInfoLog();
+                bookLogService.addLog(log);
+            }
             return new UniversalResponseBody(0,"success");
         }else{
             return new UniversalResponseBody(-1,"error");

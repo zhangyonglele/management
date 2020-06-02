@@ -1,5 +1,7 @@
 package com.lib.management.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class BookControlLog {
@@ -10,7 +12,7 @@ public class BookControlLog {
     private String optionContain;
 
     private Integer updateBy;
-
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
     public Integer getLogId() {

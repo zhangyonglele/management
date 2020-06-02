@@ -3,7 +3,9 @@ package com.lib.management.dto.helper;
 import com.lib.management.model.BookInfo;
 import lombok.Data;
 
-
+/**
+ * This class use for Help Controller input
+ */
 public class BookInfoHelper {
 
     private Integer bookType;

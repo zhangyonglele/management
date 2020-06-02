@@ -1,5 +1,7 @@
 package com.lib.management.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -9,9 +11,9 @@ public class BookBorrowLog {
     private Integer bookId;
 
     private Integer bookBorrowBy;
-
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date bookBorrowTime;
-
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date bookReturnTime;
 
     private Integer bookBorrowStatus;

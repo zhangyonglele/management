@@ -24,7 +24,7 @@ public class PictureController {
         }
     }
 
-    @GetMapping("/broadcast/picture")
+    @PostMapping("/broadcast/picture")
     @LoginRequire("librarian")
     public UniversalResponseBody getImageURL(@RequestParam("file") MultipartFile file){
         String ret = pictureService.uploadPicForBroadcast(file);

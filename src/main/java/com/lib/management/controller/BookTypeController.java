@@ -1,8 +1,11 @@
 package com.lib.management.controller;
 
+import com.lib.management.factory.BookControlLogFactory;
 import com.lib.management.filter.annotation.LoginRequire;
+import com.lib.management.model.BookControlLog;
 import com.lib.management.model.BookManager;
 import com.lib.management.model.BookType;
+import com.lib.management.service.BookLogService;
 import com.lib.management.service.BookTypeService;
 import com.lib.management.util.UniversalResponseBody;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +23,9 @@ public class BookTypeController {
     @Resource
     private BookTypeService bookTypeService;
 
+    @Resource
+    private BookLogService bookLogService;
+
     @PostMapping("/librarian/bookType/add")
     @LoginRequire("librarian")
     public UniversalResponseBody addNewBookType(@RequestParam("bookTypeMark") String bookTypeMark,
@@ -32,6 +38,11 @@ public class BookTypeController {
         newBookType.setCreateBy(bookManager.getBookManagerId());
         newBookType.setCreateTime(new Date());
         newBookType.setLargestCode(0);
+        {
+            BookControlLog log = BookControlLogFactory.getAddingBookTypeLog(bookTypeName);
+            log.setUpdateBy(bookManager.getBookManagerId());
+            bookLogService.addLog(log);
+        }
         if(bookTypeService.addANewType(newBookType)){
             return new UniversalResponseBody(0,"success");
         }else{
@@ -50,6 +61,10 @@ public class BookTypeController {
             return new UniversalResponseBody<>(-1,"error");
         }
         if(bookTypeService.removeAOldType(bookId)){
+            {
+                BookControlLog log = BookControlLogFactory.getDeleteBookTypeLog();
+                bookLogService.addLog(log);
+            }
             return new UniversalResponseBody<>(0,"success");
         }else{
             return new UniversalResponseBody<>(-1,"error");

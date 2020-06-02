@@ -4,7 +4,9 @@ import com.lib.management.model.LibrarianBroadcast;
 import lombok.Data;
 
 import java.util.Date;
-
+/**
+ * This class use for Help Controller input
+ */
 @Data
 public class NoticeHelper {
 

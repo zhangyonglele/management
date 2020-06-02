@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lib.management.mapper.BookBillMapper">
+  <resultMap id="BaseResultMap" type="com.lib.management.dto.BookBill">
+    <result column="log_id" jdbcType="INTEGER" property="logId" />
+    <result column="book_id" jdbcType="INTEGER" property="bookId" />
+    <result column="book_borrow_by" jdbcType="VARCHAR" property="bookBorrowBy" />
+    <result column="book_name" jdbcType="VARCHAR" property="bookName" />
+    <result column="book_publisher" jdbcType="VARCHAR" property="bookPublisher" />
+    <result column="book_borrow_status" jdbcType="INTEGER" property="bookBorrowStatus" />
+    <result column="permit_money_status" jdbcType="INTEGER" property="permitMoneyStatus" />
+    <result column="permit_money_number" jdbcType="DECIMAL" property="permitMoneyNumber" />
+    <result column="fine_status" jdbcType="INTEGER" property="fineStatus" />
+    <result column="fine_number" jdbcType="DECIMAL" property="fineNumber" />
+    <result column="book_borrow_time" jdbcType="TIMESTAMP" property="bookBorrowTime" />
+  </resultMap>
+  <select id="getBillRecordByDate" resultMap="BaseResultMap">
+    select *
+    from book_bill
+    where unix_timestamp(book_borrow_time)
+    between unix_timestamp(#{begin}) and unix_timestamp(#{end})
+    limit #{page},10
+  </select>
+
+  <select id="getBillRecordByPage" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select *
+    from book_bill
+    limit #{page},10
+  </select>
+
+  <select id="getBillNumberByDate" resultType="java.math.BigDecimal">
+    select sum(permit_money_number) + sum(fine_number)
+    from book_bill
+    where unix_timestamp(book_borrow_time)
+    between unix_timestamp(#{begin}) and unix_timestamp(#{end})
+  </select>
+
+  <select id="getBillFineNumber" resultType="java.math.BigDecimal">
+    select sum(fine_number)
+    from book_bill
+    where unix_timestamp(book_borrow_time)
+    between unix_timestamp(#{begin}) and unix_timestamp(#{end})
+  </select>
+
+  <select id="getBillPermitNumber" resultType="java.math.BigDecimal">
+    select sum(permit_money_number)
+    from book_bill
+    where unix_timestamp(book_borrow_time)
+            between unix_timestamp(#{begin}) and unix_timestamp(#{end})
+  </select>
+</mapper>

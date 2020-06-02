@@ -1,9 +1,12 @@
 package com.lib.management.controller;
 
 import com.lib.management.dto.helper.BookCopyHelper;
+import com.lib.management.factory.BookControlLogFactory;
 import com.lib.management.filter.annotation.LoginRequire;
+import com.lib.management.model.BookControlLog;
 import com.lib.management.model.BookManager;
 import com.lib.management.model.Books;
+import com.lib.management.service.BookLogService;
 import com.lib.management.service.BookService;
 import com.lib.management.util.UniversalResponseBody;
 import org.springframework.web.bind.annotation.*;
@@ -17,12 +20,20 @@ public class BookCopyController {
     @Resource
     private BookService bookService;
 
+    @Resource
+    private BookLogService bookLogService;
+
     @PostMapping("/librarian/bookcopy")
     @LoginRequire("librarian")
     public UniversalResponseBody<Object> addNewCopy(BookCopyHelper bookCopyHelper, int copyNumber,HttpSession session){
         BookManager bookManager = (BookManager)session.getAttribute("userInfo");
         Books book = bookCopyHelper.toBook();
         book.setBookCreateBy(bookManager.getBookManagerId());
+        {
+            BookControlLog log = BookControlLogFactory.getAddingCopyLog();
+            log.setUpdateBy(bookManager.getBookManagerId());
+            bookLogService.addLog(log);
+        }
         //book.setBookCreateBy(1);
         if(bookService.addNewBookCopy(book,copyNumber)){
             return new UniversalResponseBody<>(0,"success");

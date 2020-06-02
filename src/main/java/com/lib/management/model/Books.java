@@ -1,5 +1,7 @@
 package com.lib.management.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -16,7 +18,7 @@ public class Books {
     private Integer bookLocationSheet;
 
     private Integer bookLocationSheetLevel;
-
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date locationUpdateTime;
 
     private Integer bookBorrowStatus;
@@ -26,9 +28,9 @@ public class Books {
     private Date bookBorrowUpdateTime;
 
     private Integer bookBorrowBy;
-
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date bookBorrowedTime;
-
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date bookShouldReturnBefore;
 
     private Integer bookActiveStatus;

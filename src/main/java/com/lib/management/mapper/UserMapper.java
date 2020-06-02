@@ -3,6 +3,7 @@ package com.lib.management.mapper;
 import com.lib.management.model.User;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserMapper {
     int deleteByPrimaryKey(Integer userId);
@@ -20,4 +21,6 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    List<User> selectUserRegisterByDate(Map<String,Object> data);
 }
