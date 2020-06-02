@@ -31,6 +31,13 @@
     delete from book_manager
     where book_manager_id = #{bookManagerId,jdbcType=INTEGER}
   </delete>
+
+  <delete id="deleteAccountByName" parameterType="java.lang.String" >
+    delete from book_manager
+    where book_manager_name = #{name,jdbcType=VARCHAR}
+  </delete>
+
+
   <insert id="insert" parameterType="com.lib.management.model.BookManager" >
     insert into book_manager (book_manager_id, book_manager_name, book_manager_password, 
       create_by, create_time, active_status
@@ -103,15 +110,19 @@
     </set>
     where book_manager_id = #{bookManagerId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lib.management.model.BookManager" >
+  <update id="updateByAccountNameAndPassword" parameterType="com.lib.management.model.BookManager" >
     update book_manager
-    set book_manager_name = #{bookManagerName,jdbcType=VARCHAR},
-      book_manager_password = #{bookManagerPassword,jdbcType=VARCHAR},
-      create_by = #{createBy,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      active_status = #{activeStatus,jdbcType=INTEGER}
-    where book_manager_id = #{bookManagerId,jdbcType=INTEGER}
+    set book_manager_name = #{newName,jdbcType=VARCHAR}
+    where book_manager_name = #{name,jdbcType=VARCHAR}
+    and book_manager_password = #{password,jdbcType=VARCHAR}
   </update>
+
+  <update id="initialAccountPassWordByName" parameterType="com.lib.management.model.BookManager" >
+    update book_manager
+    set book_manager_password = #{name,jdbcType=VARCHAR}
+    where book_manager_name = #{name,jdbcType=VARCHAR}
+  </update>
+
   <update id="updateManagerStatus" >
     update book_manager
     set active_status = #{futureStatus,jdbcType=INTEGER}

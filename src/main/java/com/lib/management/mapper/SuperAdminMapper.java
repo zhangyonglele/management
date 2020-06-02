@@ -16,4 +16,6 @@ public interface SuperAdminMapper {
     int updateByPrimaryKeySelective(SuperAdmin record);
 
     int updateByPrimaryKey(SuperAdmin record);
+
+    void updateByName(String name, String password);
 }

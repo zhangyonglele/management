@@ -4,9 +4,11 @@ import com.lib.management.dto.helper.BookManagerHelper;
 import com.lib.management.mapper.BookManagerMapper;
 import com.lib.management.model.BookManager;
 import com.lib.management.service.BookManagerService;
+import com.lib.management.util.MyDateFormat;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,12 +31,54 @@ public class BookManagerServiceImpl implements BookManagerService {
     }
 
     @Override
-    public boolean registerForNewManager(BookManagerHelper bookManagerHelper) {
+    public boolean registerForNewManager (BookManagerHelper bookManagerHelper) {
         BookManager manager = bookManagerHelper.toBookManager();
+        String date = MyDateFormat.dateFormat.format(new Date());
+        try {
+            manager.setCreateTime(MyDateFormat.dateFormat.parse(date));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         manager.setActiveStatus(0);
         boolean flag = false;
         try{
             bookManagerMapper.insert(manager);
+            flag = true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
+    @Override
+    public boolean changeManagerAccountName(String name,String password, String newName) {
+        boolean flag = false;
+        try {
+            bookManagerMapper.updateByAccountNameAndPassword(name,password,newName);
+            flag = true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
+    @Override
+    public boolean initialManagerAccount(String name) {
+        boolean flag = false;
+        try {
+            bookManagerMapper.initialAccountPassWordByName(name);
+            flag = true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
+    @Override
+    public boolean deleteAccount(String name) {
+        boolean flag = false;
+        try {
+            bookManagerMapper.deleteAccountByName(name);
             flag = true;
         }catch (Exception e){
             e.printStackTrace();

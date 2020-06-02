@@ -15,9 +15,14 @@ public class SuperAdminServiceImpl implements SuperAdminService {
     @Override
     public SuperAdmin searchAccountByAdminName(String name) {
         SuperAdmin superAdmin = superAdminMapper.selectByAdminName(name);
-        if(superAdmin.getSuperAdminName().equals("")){
+        if(superAdmin == null){
             return null;
         }
         return superAdmin;
+    }
+
+    @Override
+    public void updateAccountByAdminName(String name, String password) {
+        superAdminMapper.updateByName(name,password);
     }
 }

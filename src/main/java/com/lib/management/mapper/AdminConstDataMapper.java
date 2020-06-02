@@ -2,6 +2,8 @@ package com.lib.management.mapper;
 
 import com.lib.management.model.AdminConstData;
 
+import java.math.BigDecimal;
+
 public interface AdminConstDataMapper {
     int deleteByPrimaryKey(String constKey);
 
@@ -13,5 +15,5 @@ public interface AdminConstDataMapper {
 
     int updateByPrimaryKeySelective(AdminConstData record);
 
-    int updateByPrimaryKey(AdminConstData record);
+    int updateByPrimaryKey(String constKey, BigDecimal constValue);
 }
