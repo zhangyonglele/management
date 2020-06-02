@@ -4,6 +4,9 @@ import com.lib.management.model.BookControlLog;
 
 import java.util.Date;
 
+/**
+ * Factory to produce a Control Log
+ */
 public class BookControlLogFactory {
     public static BookControlLog getAddingCopyLog(){
         BookControlLog newLog = new BookControlLog();

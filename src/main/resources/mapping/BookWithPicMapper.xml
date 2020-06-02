@@ -51,6 +51,6 @@
         AND book_status = 1
       </if>
     </where>
-    limit #{pageNumber},17
+    limit #{pageNumber},16
   </select>
 </mapper>

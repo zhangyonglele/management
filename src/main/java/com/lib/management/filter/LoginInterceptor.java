@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.lang.reflect.Method;
 
 /**
- * 配置拦截器，拦截非登录权限越界
+ * config interceptor rules，block unauthorized request
  */
 @Component
 @Slf4j

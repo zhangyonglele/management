@@ -57,7 +57,15 @@ public class BookCopyController {
     @DeleteMapping("/librarian/bookcopy")
     @LoginRequire("librarian")
     public UniversalResponseBody<Object> removeACopy(@RequestParam("id") int BookId,HttpSession session){
-
-        return null;
+        BookManager bookManager = (BookManager)session.getAttribute("userInfo");
+        if(bookService.removeBookCopy(BookId)){
+            {
+                BookControlLog log = BookControlLogFactory.getDeleteCopyLog();
+                log.setUpdateBy(bookManager.getBookManagerId());
+                bookLogService.addLog(log);
+            }
+            return new UniversalResponseBody<>(0,"success");
+        }
+        return new UniversalResponseBody<>(-1,"error");
     }
 }

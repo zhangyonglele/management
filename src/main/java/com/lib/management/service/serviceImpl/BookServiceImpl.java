@@ -37,10 +37,25 @@ public class BookServiceImpl implements BookService {
         return flag;
     }
 
+
+
     @Override
-    public boolean updateBookInfo(Books books) {
-        return false;
+    public boolean removeBookCopy(Integer bookCopyId) {
+        Books book = null;
+        boolean flag = false;
+        book = booksMapper.selectByPrimaryKey(bookCopyId);
+        if(book != null && book.getBookActiveStatus() == 1){
+            book.setBookActiveStatus(0);
+            try {
+                booksMapper.updateByPrimaryKey(book);
+                flag = true;
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return flag;
     }
+
     //查找图书
     @Override
     public Books getBookByBookId(Integer bookId) {

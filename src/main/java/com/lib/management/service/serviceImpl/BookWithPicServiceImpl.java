@@ -24,7 +24,7 @@ public class BookWithPicServiceImpl implements BookWithPicService {
     public List<BookWithPic> searchByBookName(String bookName, int page) {
         Map<String,Object> map = new HashMap<>();
         map.put("bookName",bookName);
-        map.put("pageNumber",(page - 1) * 17);
+        map.put("pageNumber",(page - 1) * 16);
         return bookWithPicMapper.selectBookByName(map);
     }
 
