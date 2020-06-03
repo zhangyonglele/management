@@ -25,6 +25,20 @@
     from user
     where user_name = #{name,jdbcType=VARCHAR}
   </select>
+  <select id="selectToSearchUserByName" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from user
+    where user_name like concat(concat('%',#{keyword}),'%')
+    limit #{page},10
+  </select>
+  <select id="selectAllUserByPageDESC" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from user
+    Order By user_id
+    limit #{page},10
+  </select>
   <select id="selectUninitReadersAccount" resultMap="BaseResultMap" parameterType="java.lang.Integer">
     select
     <include refid="Base_Column_List"/>

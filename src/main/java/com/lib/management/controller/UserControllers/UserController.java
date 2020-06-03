@@ -1,4 +1,4 @@
-package com.lib.management.controller;
+package com.lib.management.controller.UserControllers;
 
 import com.lib.management.dto.UserHelper;
 import com.lib.management.dto.UserInfoHelper;

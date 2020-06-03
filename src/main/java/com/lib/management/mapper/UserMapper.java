@@ -23,4 +23,8 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
     List<User> selectUserRegisterByDate(Map<String,Object> data);
+
+    List<User> selectToSearchUserByName(Map<String,Object> data);
+
+    List<User> selectAllUserByPageDESC(int page);
 }
