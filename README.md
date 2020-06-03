@@ -19,7 +19,7 @@ Before you install the application, you need to prepare the following *Applicati
 Please ensure your the *operating system* you will deploy this application is **CentOS7.(and the version above,or linux base system)**
 
 - **JDK11**(Open JDK11)
-- **MySQL**(On the deploy Computer)
+- **MySQL5.7**(On the deploy Computer)
 - **Redis**
 - **Nginx**(For https supporting)
 
