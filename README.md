@@ -54,7 +54,7 @@ package the app.
 
 - As a User or DBA
 
-You can download the release version on our github to easily deploy the serer app. Click download to jump to our page.
+You can download the release version on our github to easily deploy the server app. Click download to jump to our page.
 
 [download](https://github.com/zhangyonglele/management/releases)
 
@@ -126,7 +126,7 @@ Check the application running status.
 Run the command below to check if the function work well.
 
 ```shell script
-curl localhost:8080/bookTypes
+curl http://localhost:8080/bookTypes
 ```
 
 If you get a response with errorCode 0, that means it runs well.
