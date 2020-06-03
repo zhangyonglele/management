@@ -7,13 +7,13 @@ The project bases on an the Java platform.
 
 ## Table Of Content
 
-- [Environment Preparation](#Environment Preparation)
+- [Environment Preparation](#EnvironmentPreparation)
 - [Install Guide](#Install Guide)
 - [Functions Testing Guide](#Function Testing Guide)
 - [Contributor](#Contributor)
 - [Application Deployment](#Application Deployment)
 
-# Environment Preparation
+# EnvironmentPreparation
 Before you install the application, you need to prepare the following *Application* or *computer environment*
 
 Please ensure your the *operating system* you will deploy this application is **CentOS7.(and the version above,or linux base system)**
