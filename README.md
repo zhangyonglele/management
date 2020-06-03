@@ -7,13 +7,13 @@ The project bases on an the Java platform.
 
 ## Table Of Content
 
-- [Environment Preparation](#EnvironmentPreparation)
-- [Install Guide](#Install Guide)
+- [Environment Preparation](#Environment_Preparation)
+- [Install Guide](#Install_Guide)
 - [Functions Testing Guide](#Function Testing Guide)
 - [Contributor](#Contributor)
 - [Application Deployment](#Application Deployment)
 
-# EnvironmentPreparation
+# Environment_Preparation
 Before you install the application, you need to prepare the following *Application* or *computer environment*
 
 Please ensure your the *operating system* you will deploy this application is **CentOS7.(and the version above,or linux base system)**
@@ -42,7 +42,7 @@ And we also show you the development environment configuration to test the syste
   - host: 127.0.0.1
   - port: 6379(default port)
 
-# Install Guide
+# Install_Guide
 
 After finish the environment preparation, the following operation will guide you to run a quick test to start the 
 back end server. [WARN : IT IS NOT OFFICIALLY INSTALL]
