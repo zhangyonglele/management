@@ -15,4 +15,6 @@ public interface BookManagerService {
     boolean initialManagerAccount(String name);
 
     boolean deleteAccount(String name);
+
+    boolean recoverLibrarianAccount(String userName);
 }

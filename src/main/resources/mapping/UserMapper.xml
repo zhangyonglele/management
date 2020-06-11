@@ -23,19 +23,20 @@
     select
     <include refid="Base_Column_List"/>
     from user
-    where user_name = #{name,jdbcType=VARCHAR}
+    where user_name = #{name,jdbcType=VARCHAR} and user_status = 1
   </select>
   <select id="selectToSearchUserByName" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
     from user
-    where user_name like concat(concat('%',#{keyword}),'%')
+    where user_name like concat(concat('%',#{keyword}),'%') and user_status = 1
     limit #{page},10
   </select>
   <select id="selectAllUserByPageDESC" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
     from user
+    where user_status = 1
     Order By user_id
     limit #{page},10
   </select>

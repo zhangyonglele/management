@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
             return false;
         }else{
             uninitReader.setCreateBy(initBy);
-            uninitReader.setUserStatus(300);
+            uninitReader.setUserStatus(1);
             if(userMapper.updateByPrimaryKeySelective(uninitReader) > 0){
                 return true;
             }else{
@@ -80,10 +80,16 @@ public class UserServiceImpl implements UserService {
 
     //修改用户信息
     @Override
-    public User alterPersonInfo(User user) {
-        userMapper.updateByPrimaryKey(user);
-        User user1 = userMapper.selectByPrimaryKey(user.getUserId());
-        return user1;
+    public boolean alterPersonInfo(User user) {
+        boolean flag = false;
+        try {
+            userMapper.updateByPrimaryKey(user);
+            flag = true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return flag;
     }
 
     @Override

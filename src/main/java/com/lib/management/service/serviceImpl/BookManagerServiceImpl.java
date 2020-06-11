@@ -86,4 +86,20 @@ public class BookManagerServiceImpl implements BookManagerService {
         }
         return flag;
     }
+
+    @Override
+    public boolean recoverLibrarianAccount(String userName) {
+        boolean flag = false;
+        BookManager librarian = bookManagerMapper.selectByManagerName(userName);
+        if(librarian != null && !librarian.getBookManagerName().equals("")){
+            try{
+                librarian.setBookManagerPassword("123456");
+                bookManagerMapper.updateByPrimaryKeySelective(librarian);
+                flag = true;
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return flag;
+    }
 }

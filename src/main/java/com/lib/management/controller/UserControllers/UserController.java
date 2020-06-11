@@ -51,7 +51,7 @@ public class UserController {
         user.setCreateTime(new Date());
         user.setCreateBy(null);
         user.setUserStatus(0);
-        user.setPermitStatus(0);
+        user.setPermitStatus(300);
         if(userService.addNewUser(user))
             return new UniversalResponseBody(0,"success");
         else
@@ -108,5 +108,20 @@ public class UserController {
             return new UniversalResponseBody(0,"success");
         }
         return new UniversalResponseBody(-1,"error");
+    }
+
+    @PutMapping("/read/info/re")
+    @LoginRequire("librarian")
+    public UniversalResponseBody changeInfo(@RequestParam("userId")int userId,
+                                            @RequestParam("userName")String userName,
+                                            @RequestParam("userPassword")String userPassword){
+        User temp = userService.getUserInfoByUserId(userId);
+        temp.setUserName(userName);
+        temp.setUserPassword(userPassword);
+        if(userService.alterPersonInfo(temp)){
+           return new UniversalResponseBody(0,"success");
+        }else{
+            return new UniversalResponseBody(-1,"error");
+        }
     }
 }

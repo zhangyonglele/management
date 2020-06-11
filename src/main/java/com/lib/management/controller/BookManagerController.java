@@ -46,8 +46,6 @@ public class BookManagerController {
 
     @PutMapping("/librarian/find")
     public UniversalResponseBody findBackPasswordRequire(String userName){
-        // TODO: 2020/3/22 这里实际上实现密码找回后，会冻结账户，账户将会无法登录，这个功能实现与否有待商榷
-        // TODO: 2020/3/22 实现思路，使用redis作为消息队列，在检查用户登录状态时检查redis中是否拥有某个对某用户的更新操作，如果有，则销毁该session，并拒绝该用户的权限越界请求
         if(bookManagerService.changeManagerAccountStatus(userName,2)){
             return new UniversalResponseBody(0,"success");
         }else{
@@ -102,6 +100,15 @@ public class BookManagerController {
             return new UniversalResponseBody<>(0,"success");
         }else{
             return new UniversalResponseBody<>(-1,"error");
+        }
+    }
+
+    @PutMapping("/librarian/recover")
+    public UniversalResponseBody recoverLibrarianPassword(@RequestParam("userAccount")String userName){
+        if(bookManagerService.recoverLibrarianAccount(userName)){
+            return new UniversalResponseBody(0,"success");
+        }else{
+            return new UniversalResponseBody(-1,"error");
         }
     }
 }
